@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+<style>
+    :root{
+      --bg:#0b0b0e; --panel:#121219; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --space-0:0; --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem;
+      --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --r-1:.375rem; --r-2:.75rem; --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      --dur-fast:.15s; --dur:.25s; --dur-slow:.5s; --ease:cubic-bezier(.2,.7,.2,1);
+      --font:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Utilities */
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .stack{display:flex;flex-direction:column}
+    .stack>*+*{margin-top:var(--space-4)}
+    .grid{display:grid;gap:var(--space-4)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .btn{--btn-bg:transparent;--btn-text:var(--text);--btn-border:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-text);font-weight:700;transition:transform var(--dur) var(--ease), background var(--dur), border-color var(--dur);outline-offset:3px}
+    .btn:hover{transform:translateY(-1px);text-decoration:none}
+    .btn--primary{--btn-bg:var(--accent);--btn-text:#0e061d;--btn-border:transparent}
+    .btn--ghost{--btn-bg:rgba(255,255,255,.06)}
+    .btn:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:999px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.55);color:#e6dbff;font-size:.9rem}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:var(--space-4);top:var(--space-4);z-index:1000;padding:.5rem .75rem;border-radius:var(--r-1);background:var(--accent);color:#0e061d;font-weight:800;transform:translateY(-200%);transition:transform var(--dur) var(--ease)}
+    .skip-link:focus{transform:none}
+
+    /* Header */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:var(--space-3) 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent;transition:border-color var(--dur), background var(--dur)}
+    .nav__link:hover{text-decoration:none;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .nav__link:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    /* Minimal hero */
+    .intro{position:relative;isolation:isolate;text-align:center;padding:clamp(2rem,6vw,5rem) 0 var(--space-8);background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title--brand{margin:.2rem auto .6rem auto;line-height:1.02;font-size:clamp(2rem,5vw,3rem);font-weight:1000;letter-spacing:.5px;text-transform:uppercase}
+    .intro__subtitle{margin:.2rem auto 0 auto;font-size:clamp(1.1rem,3.5vw,1.25rem);font-weight:800;color:var(--muted)}
+
+    /* Category quick-jump chips */
+    .catnav{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+
+    /* Sections & Tiles */
+    .section{padding:var(--space-12) 0}
+    .section__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;margin-bottom:var(--space-6)}
+    .tiles{grid-template-columns:1fr}
+    @media (min-width:48rem){.tiles{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:76rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+
+    .tile{position:relative;display:flex;flex-direction:column;min-height:220px;border-radius:var(--r-2);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);transition:transform var(--dur) var(--ease), border-color var(--dur), background var(--dur)}
+    .tile:hover{transform:translateY(-3px);text-decoration:none;border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.08)}
+    .tile__media{aspect-ratio:16/9;background:radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%),linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));display:grid;place-items:center;color:#e9deff;font-size:1.75rem}
+    .tile__body{padding:var(--space-6);display:flex;flex-direction:column;gap:.5rem}
+    .tile__title{font-size:1.1rem;margin:0;font-weight:900}
+    .tile__desc{color:var(--muted);margin:0}
+
+    /* Go circle */
+    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
+    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
+    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+
+    /* Reveal-on-scroll */
+    .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
+    .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
+
+    /* Footer */
+    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer__grid{display:grid;gap:var(--space-6)}
+    @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
+    .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
+    .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
+    .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+  
+/* === Enhanced select styling (country picker) === */
+.select-wrap{position:relative; display:inline-flex; align-items:center;}
+.select{
+  -webkit-appearance:none; appearance:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  padding:.65rem 2.4rem .65rem 1rem;
+  min-width:260px;
+  color:inherit;
+  font-weight:900;
+  letter-spacing:.3px;
+  outline:none;
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.25), 0 6px 18px rgba(0,0,0,.25);
+  transition:border-color .18s ease, box-shadow .18s ease, transform .06s ease;
+}
+.select:hover{transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(0,0,0,.25), 0 8px 22px rgba(0,0,0,.30);}
+.select:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(139,92,246,.25), inset 0 1px 0 rgba(0,0,0,.25);}
+.select-wrap::after{
+  content:"";
+  position:absolute;
+  right:.85rem;
+  width:12px; height:12px;
+  pointer-events:none; opacity:.85;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat; background-size:12px 12px;
+}
+/* compact on small screens */
+@media (max-width:560px){
+  .select{min-width: 200px; padding:.55rem 2rem .55rem .85rem; font-weight:800;}
+}
+
+/* === Ensure dropdown options are legible in light & dark === */
+.select{ color-scheme: dark; }
+.select option, .select optgroup{
+  background-color:#0b0b0e; /* deep near-black */
+  color:#ffffff;
+}
+.select option:checked{ background-color:#1f2937; color:#ffffff; }
+.select option:hover{ background-color:#374151; color:#ffffff; }
+/* Fallback for older browsers */
+@media (prefers-color-scheme: light){
+  .select option, .select optgroup{ background-color:#0b0b0e; color:#ffffff; }
+}
+</style>
+<style>
+/* Filters: default 'off' state shows subdued grey look for buttons */
+button.chip{opacity:.7; filter: grayscale(1);}
+button.chip[aria-pressed="true"]{opacity:1; filter:none; background:rgba(139,92,246,.2); border-color:rgba(139,92,246,.9)}
+</style><style>
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+</style><style>
+/* --- Subcategory Dropdown + Scroll Alignment --- */
+.nav-item.has-sub { position: relative; display: inline-block; }
+.nav-item.has-sub > a { display: inline-block; }
+.sub-dropdown { 
+  display: none; position: absolute; left: 0; top: 100%;
+  background: rgba(20,20,30,0.95); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 8px; min-width: 240px; z-index: 50;
+  backdrop-filter: blur(6px);
+}
+.sub-dropdown a { 
+  display: block; padding: 10px 12px; border-radius: 8px; 
+  text-decoration: none; color: #eaeaea; white-space: nowrap;
+}
+.sub-dropdown a:hover { background: rgba(255,255,255,0.08); }
+.nav-item.has-sub:hover > .sub-dropdown { display: block; }
+
+/* Keep headings from hiding under sticky headers on jump */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; grid-column: 1 / -1; display: block; }
+</style><style>
+/* --- Chip Dropdown on Category Bar --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 8px; }
+.catnav .chip--with-sub { position: relative; }
+.catnav .chip--with-sub > a.chip { position: relative; z-index: 2; }
+.catnav .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 6px); left: 0;
+  background: rgba(20,20,30,0.98); padding: 8px; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  white-space: nowrap; z-index: 40;
+}
+.catnav .chip-dropdown .chip--sub { display: block; margin: 6px; }
+.catnav .chip--with-sub:hover .chip-dropdown { display: block; }
+</style><style>
+/* --- Category bar dropdowns --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 12px; }
+.catnav .chip--with-sub { position: relative; }
+.catnav .chip--with-sub > .chip { z-index: 2; }
+.catnav .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0;
+  background: rgba(20,20,30,0.98); padding: 10px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  min-width: 240px;
+}
+.catnav .chip-dropdown .chip { display: block; margin: 6px 4px; }
+.catnav .chip--with-sub:hover .chip-dropdown { display: block; }
+</style><style>
+/* --- Polished dropdown behavior --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 12px; }
+.catnav .chipwrap.chip--with-sub { position: relative; display: inline-block; }
+.catnav .chipwrap.chip--with-sub > .chip { position: relative; z-index: 2; display: inline-block; }
+.catnav .chipwrap .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0;
+  width: 100%; min-width: 0;
+  background: rgba(20,20,30,0.98); padding: 10px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.catnav .chipwrap .chip-dropdown .chip { 
+  display: block; width: 100%; margin: 6px 0; text-align: center; 
+}
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style><style>
+/* --- Solid, stacked subcategory dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 0;
+  background: #111; /* solid background to prevent bleed-through */
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  padding: 6px 0; /* minimal vertical padding */
+  z-index: 50;
+}
+
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;                    /* remove gaps between chips */
+  border-radius: 0;             /* square interior corners for flush stack */
+  text-align: center;
+}
+
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* ensure dropdown shows on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style><style>
+/* --- Glass-effect subcategory dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* attach directly under parent chip */
+  left: 0;
+  width: 100%;
+  background: rgba(120, 60, 200, 0.15); /* transparent purple glass */
+  backdrop-filter: blur(12px);          /* frosted glass effect */
+  border-radius: 12px;
+  border: 1px solid rgba(180, 120, 255, 0.4); /* purple outline */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  z-index: 50;
+}
+
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  text-align: center;
+}
+
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown {
+  display: block;
+}
+</style><style>
+/* --- Seamless chip-extension dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% - 8px); /* overlap the parent chip border for a seamless join */
+  left: 0;
+  width: 100%;
+  background: transparent;   /* no panel box */
+  border: none;
+  box-shadow: none;
+  padding: 0;                /* no side padding */
+  z-index: 60;
+}
+
+/* stack subchips flush with no gaps; rely on each chip's own style */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;          /* interior edges straight so they stack */
+  text-align: center;
+  overflow: hidden;          /* keep text inside */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* round the very bottom of the stack */
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 0;  /* attaches to parent chip nicely */
+  border-top-right-radius: 0;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* show dropdown on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style><style>
+/* --- Expanding chip with integrated subcategories --- */
+.catnav { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Wrapper turns into a vertical stack */
+.catnav .chipwrap.chip--with-sub {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Base chip */
+.catnav .chipwrap.chip--with-sub > .chip {
+  transition: border-radius 120ms ease;
+  z-index: 2;
+}
+
+/* On hover, flatten bottom corners so it connects visually with items below */
+.catnav .chipwrap.chip--with-sub:hover > .chip {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Dropdown becomes part of the normal flow (no absolute positioning), stacked under the chip */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: static;   /* stack naturally below */
+  width: 100%;
+  padding: 0;         /* no panel look */
+  margin-top: 6px;    /* tiny gap between main chip and first option */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Show on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+
+/* Subcategory "chips" styled to look fused with the top chip */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;         /* straight interior edges */
+  text-align: center;
+  white-space: normal;      /* allow wrapping so words aren't clipped */
+  overflow: visible;        /* ensure full text visible */
+  line-height: 1.2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Round only the very bottom corners of the last item */
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+</style><style>
+/* --- Overlayed expanding chip (no layout shift) --- */
+.catnav .chipwrap.chip--with-sub {
+  position: relative;        /* anchor for absolute dropdown */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Flatten parent chip corners on hover so it fuses visually */
+.catnav .chipwrap.chip--with-sub:hover > .chip {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Overlay dropdown: absolute, full width of chip, sits on top of content */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 60;               /* above section headings */
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Show on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+
+/* Sub-items: stacked, wrapped text, seamless pill stack */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  text-align: center;
+  white-space: normal;   /* allow wrapping */
+  overflow: visible;
+  line-height: 1.2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* round only the bottom of the last item */
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+/* Prevent hover gap flicker between chip and dropdown */
+.catnav .chipwrap.chip--with-sub::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 6px;              /* small hover bridge */
+}
+</style><style>
+/* Reserve space only under the "Browse by category" chip bar, not under Filters */
+nav.catnav[aria-label="Categories"] { margin-bottom: 150px; }
+@media (max-width: 900px) {
+  nav.catnav[aria-label="Categories"] { margin-bottom: 180px; }
+}
+
+/* Keep jump alignment */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; }
+
+/* Slight width bump for 'Other' */
+nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-other"] {
+  min-width: 170px; text-align: center;
+}
+</style><style>
+/* Tighter gap below the Categories chip bar */
+nav.catnav[aria-label="Categories"] { margin-bottom: 108px; }  /* was 150px */
+@media (max-width: 900px) {
+  nav.catnav[aria-label="Categories"] { margin-bottom: 128px; } /* was 180px */
+}
+
+/* Keep jump alignment */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; }
+
+/* 'Other' width comfort */
+nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-other"] {
+  min-width: 170px; text-align: center;
+}
+</style><style>
+/* --- Mobile: tap to open/close category dropdowns --- */
+@media (hover: none) and (pointer: coarse) {
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub .chip-dropdown { display: none; }
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub.open .chip-dropdown { display: block; }
+  /* Ensure the parent chip stays on top of the dropdown */
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub.open > .chip {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    z-index: 71;
+  }
+}
+</style>
+<style>
+  .intro{position:relative;text-align:center;padding:clamp(2rem,4vw,3rem) 0 1rem}
+  .intro__title{margin:.2rem auto .4rem auto;line-height:1.02;letter-spacing:.4px;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:1000}
+  .intro__subtitle{margin:0 auto;color:var(--muted);font-weight:800}
+  .tool{padding:2.2rem 0 3.2rem}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+        border:1px solid rgba(255,255,255,.12);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.45);
+        padding:1.4rem;max-width:1080px;margin:0 auto}
+  .form-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+  .record{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+          border-radius:12px;padding:14px}
+  .hidden{display:none}
+  .sections{display:grid;gap:14px}
+  .section{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px}
+  .section h3{margin:.2rem 0 10px 0;font-size:1rem;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);font-weight:800}
+  .grid{display:grid;grid-template-columns:1fr 2fr;gap:8px 14px}
+  .label{color:var(--muted);font-weight:600;text-transform:uppercase}
+  .value{font-weight:800}
+  .pulse{animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(139,92,246,.35)}70%{box-shadow:0 0 0 10px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+  .link-btn{color:var(--accent);font-weight:900;text-decoration:underline;cursor:pointer;background:none;border:0;padding:0}
+  .error{margin-top:10px;color:#ff7b7b;font-weight:800}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} .section{padding:10px} }
+</style>
+</head>
+<body>
+<header class="site-header" role="banner">
+<div class="container mast">
+<nav aria-label="Primary" class="nav">
+<ul class="nav__list">
+
+<!-- NAVIGATION BAR -->
+<li><a class="nav__link" href="home.html">Home</a></li>
+<li><a class="nav__link nav__link--highlight" href="about.html">About</a></li>
+<li><a class="nav__link" href="tools.html">Tools</a></li>
+<li><a class="nav__link" href="contact.html">Contact</a></li>
+<li><a class="nav__link" href="privacy.html">Privacy</a></li>
+<li><a class="nav__link" href="terms.html">Terms</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="intro">
+    <div class="container">
+      <h1 class="intro__title">Fake Information Generator</h1>
+      <p class="intro__subtitle">Generate rich, varied placeholder identities — all client-side.</p>
+    </div>
+  </section>
+
+  <section class="tool">
+    <div class="container">
+      <div class="card" role="region" aria-label="Fake information generator">
+        <div class="form-row">
+          <label style="display:flex;align-items:center;gap:8px">
+            <span style="color:var(--muted);font-weight:700">Country</span>
+            <span class="select-wrap"><select id="country" class="select"><option value="any" selected>Any</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Brazil">Brazil</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cabo Verde">Cabo Verde</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Costa Rica">Costa Rica</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czechia">Czechia</option><option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Eswatini">Eswatini</option><option value="Ethiopia">Ethiopia</option><option value="Fantasy">Fantasy</option><option value="Federated States of Micronesia">Federated States of Micronesia</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Greece">Greece</option><option value="Grenada">Grenada</option><option value="Guatemala">Guatemala</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Honduras">Honduras</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Ivory Coast">Ivory Coast</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kosovo">Kosovo</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mexico">Mexico</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="North Korea">North Korea</option><option value="North Macedonia">North Macedonia</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Republic of the Congo">Republic of the Congo</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Korea">South Korea</option><option value="South Sudan">South Sudan</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select></span>
+          </label>
+          <div style="display:flex;gap:.5rem;align-items:center">
+            <button id="generate" type="button" class="btn btn--primary pulse">Generate</button>
+          </div>
+        </div>
+
+        <article id="record" class="record hidden" aria-live="polite"></article>
+        <div id="error" class="error hidden"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
+<div class="container" style="text-align:center">
+<p class="fine" style="margin:0">
+        © <span id="year">2025</span> riyst.com
+      </p>
+</div>
+</footer>
+</body>
+</html>
+
+<script>
+(function(){'use strict';
+  document.addEventListener('DOMContentLoaded', function(){
+
+    // Utilities
+    const R = (arr)=>arr[Math.floor(Math.random()*arr.length)];
+    const RI = (a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+    const pad2 = (n)=>String(n).padStart(2,'0');
+    const AtoZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    // Country list
+    const COUNTRY_LIST = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fantasy", "Federated States of Micronesia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Republic of the Congo", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
+
+    // Country -> language (for name sets)
+    const LANG = {
+      // English world
+      "United States":"english","United Kingdom":"english","Ireland":"english","Canada":"english","Australia":"english","New Zealand":"english",
+      // Western Europe
+      "France":"french","Belgium":"french","Luxembourg":"french","Switzerland":"german","Germany":"german","Austria":"german",
+      "Spain":"spanish","Mexico":"spanish","Argentina":"spanish","Colombia":"spanish","Chile":"spanish","Peru":"spanish","Uruguay":"spanish","Venezuela":"spanish","Ecuador":"spanish","Bolivia":"spanish","Paraguay":"spanish","Panama":"spanish","Costa Rica":"spanish","Guatemala":"spanish","Honduras":"spanish","El Salvador":"spanish","Nicaragua":"spanish","Dominican Republic":"spanish",
+      "Portugal":"portuguese","Brazil":"portuguese","Angola":"portuguese","Mozambique":"portuguese",
+      "Italy":"italian","San Marino":"italian","Vatican City":"italian","Netherlands":"dutch",
+      // Central & Eastern
+      "Poland":"polish","Czechia":"czech","Slovakia":"czech","Hungary":"hungarian","Romania":"romanian",
+      "Russia":"russian","Belarus":"russian","Ukraine":"ukrainian","Serbia":"serbian","Bosnia and Herzegovina":"serbian","Croatia":"croatian","Slovenia":"croatian","North Macedonia":"serbian","Bulgaria":"bulgarian",
+      // Greece/Turkey
+      "Greece":"greek","Cyprus":"greek","Turkey":"turkish",
+      // Middle East & North Africa
+      "Saudi Arabia":"arabic","United Arab Emirates":"arabic","Qatar":"arabic","Bahrain":"arabic","Kuwait":"arabic","Oman":"arabic","Yemen":"arabic",
+      "Jordan":"arabic","Lebanon":"arabic","Syria":"arabic","Iraq":"arabic","Egypt":"arabic","Morocco":"arabic","Algeria":"arabic","Tunisia":"arabic","Libya":"arabic",
+      "Iran":"persian","Israel":"hebrew",
+      // South & Southeast Asia
+      "India":"hindi","Pakistan":"hindi","Sri Lanka":"tamil","Bangladesh":"bengali","Nepal":"hindi",
+      "Indonesia":"indonesian","Malaysia":"malay","Singapore":"malay","Philippines":"filipino",
+      "Vietnam":"vietnamese","Thailand":"thai",
+      // East Asia
+      "China":"chinese","Taiwan":"chinese","Japan":"japanese","South Korea":"korean","North Korea":"korean",
+      // Africa samples
+      "Kenya":"swahili","Tanzania":"swahili","Uganda":"swahili","Rwanda":"swahili","Burundi":"swahili",
+      "Ethiopia":"amharic","Nigeria":"nigerian","Ghana":"nigerian","Cameroon":"nigerian","Sierra Leone":"nigerian","Liberia":"nigerian"
+    };
+
+    // Name datasets (trimmed but realistic)
+    const NAMES = {
+      english: { male:["James","John","William","Thomas","George","Daniel","David","Michael","Andrew","Christopher","Benjamin","Samuel","Oliver","Jack","Noah","Liam","Ethan","Logan","Lucas","Mason"],
+                 female:["Elizabeth","Mary","Catherine","Emma","Olivia","Ava","Sophia","Isabella","Mia","Charlotte","Amelia","Harper","Emily","Ella","Grace","Lily"],
+                 last:["Smith","Johnson","Brown","Taylor","Anderson","Thomas","Jackson","White","Harris","Martin","Thompson","Walker","King","Wright","Green","Baker","Ward","Turner","Cooper","Hill","Carter","Mitchell"] },
+      french:  { male:["Louis","Arthur","Jules","Hugo","Gabriel","Raphaël","Léo","Lucas","Noé","Paul"], female:["Emma","Louise","Chloé","Inès","Camille","Léa","Zoé","Sarah","Jeanne","Anna"], last:["Dubois","Durand","Lefebvre","Martin","Bernard","Petit","Robert","Richard","Moreau","Laurent"] },
+      german:  { male:["Maximilian","Felix","Lukas","Leon","Jonas","Paul","Noah","Elias","Finn"], female:["Mia","Emma","Lina","Hannah","Marie","Luisa","Amelie"], last:["Müller","Schmidt","Schneider","Fischer","Weber","Wagner","Becker","Hoffmann"] },
+      spanish: { male:["Alejandro","Daniel","Diego","Javier","José","Luis","Manuel","Miguel","Pablo","Sergio","Juan"], female:["Ana","Carmen","Claudia","Daniela","Elena","Isabel","Lucía","María","Marta","Paula","Sofía"], last:["García","Martínez","López","Sánchez","González","Rodríguez","Fernández","Pérez","Gómez","Díaz"] },
+      italian: { male:["Alessandro","Lorenzo","Leonardo","Matteo","Francesco","Andrea","Gabriele"], female:["Sofia","Giulia","Aurora","Alice","Giorgia","Martina","Chiara"], last:["Rossi","Russo","Ferrari","Esposito","Bianchi","Romano","Colombo"] },
+      dutch:   { male:["Daan","Sem","Lucas","Levi","Finn","Milan"], female:["Emma","Julia","Mila","Tess","Sophie","Lotte"], last:["de Jong","Jansen","de Vries","van den Berg","Bakker","van Dijk"] },
+      portuguese:{ male:["João","Miguel","Gabriel","Mateus","Gustavo","Pedro"], female:["Maria","Ana","Beatriz","Carolina","Fernanda"], last:["Silva","Santos","Oliveira","Pereira","Ferreira","Almeida","Costa"] },
+      polish:  { male:["Jakub","Kacper","Antoni","Jan","Szymon","Adam"], female:["Zuzanna","Julia","Maja","Zofia","Hanna"], last:["Nowak","Kowalski","Wiśniewski","Wójcik","Kamiński","Lewandowski"] },
+      romanian:{ male:["Andrei","Mihai","Alexandru","Cristian","Ştefan"], female:["Maria","Elena","Ioana","Ana","Andreea"], last:["Popescu","Ionescu","Stan","Dumitrescu","Popa"] },
+      greek:   { male:["Γεώργιος","Δημήτριος","Νικόλαος","Ιωάννης"], female:["Μαρία","Ελένη","Αναστασία","Γεωργία"], last:["Παπαδόπουλος","Νικολάου","Γεωργίου","Χριστοδούλου"] },
+      turkish: { male:["Mehmet","Mustafa","Ahmet","Ali","Hüseyin","Yusuf"], female:["Fatma","Ayşe","Emine","Hatice","Zeynep","Elif"], last:["Yılmaz","Kaya","Demir","Şahin","Çelik","Öztürk"] },
+      russian: { male:["Александр","Сергей","Дмитрий","Андрей","Алексей","Иван","Максим"], female:["Анна","Екатерина","Ольга","Наталья","Мария"], last:["Иванов","Петров","Смирнов","Кузнецов","Соколов"] },
+      ukrainian:{ male:["Олександр","Андрій","Дмитро","Іван","Максим","Богдан","Сергій"], female:["Софія","Анастасія","Олена","Наталія","Марія","Ірина"], last:["Шевченко","Ковальчук","Бондаренко","Мельник","Кравченко","Бойко"] },
+      czech:   { male:["Jakub","Jan","Tomáš","Lukáš","Petr"], female:["Anna","Eliška","Tereza","Adéla","Karolína"], last:["Novák","Svoboda","Novotný","Dvořák","Černý"] },
+      hungarian:{ male:["Bence","Máté","Levente","Dániel"], female:["Hanna","Luca","Anna","Zsófia"], last:["Nagy","Kovács","Tóth","Szabó"] },
+      arabic:  { male:["محمد","أحمد","علي","عمر","يوسف"], female:["فاطمة","مريم","آية","نور","ليلى"], last:["الخطيب","العتيبي","الزهراني","النجار","الحسيني"] },
+      persian: { male:["علی","محمدرضا","حسین","رضا"], female:["فاطمه","زهرا","نگار","مهسا"], last:["کریمی","محمدی","حسینی","رضایی"] },
+      hebrew:  { male:["דוד","יוסף","נעם","יואב"], female:["מיה","יעל","נועה","תמר"], last:["כהן","לוי","מזרחי","פרץ"] },
+      chinese: "custom", japanese: "custom", korean: "custom",
+      vietnamese: "custom",
+      thai:    { male:["สมชาย","วีรภัทร","นพดล","อนันต์"], female:["สุภาวดี","กมล","พรทิพย์","นลิน"], last:["ศรีสุข","จันทร์เพ็ญ","บุญช่วย","ทองดี"] },
+      hindi:   { male:["आरव","विवान","अर्जुन","आदित्य","राहुल"], female:["अनन्या","रिया","काव्या","नेहा","प्रियंका"], last:["शर्मा","वर्मा","अग्रवाल","गुप्ता","सिंह"] },
+      bengali: { male:["আরিফ","রাহাত","সাব্বির"], female:["সুমাইয়া","নুসরাত","মেহজাবিন"], last:["চৌধুরী","হোসেন","ইসলাম","সরকার"] },
+      tamil:   { male:["அருண்","விக்னேஷ்","முருகன்"], female:["அஞ்சலி","காயத்ரி","லட்சுமி"], last:["சுப்பிரமணியன்","நாராயணன்","ராமச்சந்திரன்"] },
+      indonesian:{ male:["Muhammad","Rizky","Budi","Agus"], female:["Siti","Nurul","Ayu","Dewi"], last:["Saputra","Pratama","Hidayat","Wijaya"] },
+      malay:   { male:["Ahmad","Muhammad","Adam","Hakim"], female:["Siti","Aisyah","Nadia","Hannah"], last:["bin Abdullah","bin Ismail","binti Ahmad","binti Ali"] },
+      filipino:{ male:["Juan","Jose","Mark","Paolo"], female:["Maria","Angelica","Jessa","Jasmine"], last:["Santos","Reyes","Cruz","Bautista","Garcia","Dela Cruz"] },
+      swahili: { male:["Juma","Hassan","Omar","Kelvin"], female:["Aisha","Zainab","Neema","Grace"], last:["Odhiambo","Mwangi","Njoroge","Ochieng","Kimani"] },
+      amharic: { male:["አብርሃም","ዳዊት","ከበደ"], female:["ማሪያም","ሀና","ሰላም"], last:["ተስፋዬ","ገብረ","አለም"] },
+      nigerian:{ male:["Oluwaseun","Emeka","Chinedu","Tunde","Ibrahim"], female:["Chioma","Amina","Ada","Ngozi"], last:["Okafor","Adeyemi","Balogun","Okoye","Oladipo"] }
+    };
+
+    function pickLang(country){ return LANG[country] || "english"; }
+
+    function buildChinese(){ const s=["王","李","张","刘","陈","杨","赵","黄","周","吴","徐","孙","胡","朱","高","林","何","郭","马","罗"]; const g=["伟","芳","娜","敏","静","磊","强","军","杰","涛","艳","超","明","勇"]; return R(s)+R(g)+(Math.random()>0.6?R(g):""); }
+    function buildJapanese(){ const s=["佐藤","鈴木","高橋","田中","伊藤","渡辺","山本","中村","小林","加藤"]; const g=["陽斗","蓮","葵","結衣","大和","空","蒼","さくら","楓"]; return R(s)+" "+R(g); }
+    function buildKorean(){ const s=["김","이","박","최","정","윤","장","임","한"]; const g=["민준","서준","예준","도윤","하준","서연","지우","지민","윤서","하윤"]; return R(s)+R(g); }
+    function buildVietnamese(gender){ const last=["Nguyễn","Trần","Lê","Phạm","Hoàng","Huỳnh","Phan","Vũ","Đặng"]; const midM=["Văn","Hữu","Minh","Quang"]; const midF=["Thị","Ngọc","Thuỳ","Bích","Kim"]; const given = gender==="Male"?["An","Bảo","Dũng","Hùng","Khánh","Long","Nam","Phong","Quân","Thắng"]:["Anh","Chi","Duyên","Giang","Hà","Linh","Mai","Ngân","Vy"]; return `${R(last)} ${gender==="Male"?R(midM):R(midF)} ${R(given)}`; }
+
+    function makeNameByCountry(country,gender){
+      if(country==="Fantasy"){ return R(["Aela","Seren","Thorin","Elara","Kael","Rowan","Dorian","Lyra","Gideon","Mira"])+" "+R(["Stormwind","Blackthorn","Ravenwood","Emberfall","Nightbloom","Ironhart","Frostvale"]); }
+      const lang = pickLang(country);
+      if(lang==="chinese") return buildChinese();
+      if(lang==="japanese") return buildJapanese();
+      if(lang==="korean") return buildKorean();
+      if(lang==="vietnamese") return buildVietnamese(gender);
+      const ds = NAMES[lang] || NAMES.english;
+      const first = gender==="Male" ? R(ds.male) : R(ds.female);
+      const last  = R(ds.last);
+      return `${first} ${last}`;
+    }
+
+    // Phone formats by country (simplified but realistic)
+    const PHONE = {
+      "United States": () => `+1 ${RI(201,989)}-${RI(200,999)}-${RI(1000,9999)}`,
+      "United Kingdom": () => `+44 7${RI(0,9)} ${RI(1000,9999)} ${RI(1000,9999)}`,
+      "Canada": () => `+1 ${RI(200,999)}-${RI(200,999)}-${RI(1000,9999)}`,
+      "Australia": () => `+61 4${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Germany": () => `+49 1${RI(5,7)} ${RI(1000000,9999999)}`,
+      "France": () => `+33 6 ${RI(10000000,99999999)}`,
+      "Spain": () => `+34 6${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Italy": () => `+39 3${RI(0,9)} ${RI(1000000,9999999)}`,
+      "Netherlands": () => `+31 6 ${RI(10000000,99999999)}`,
+      "Poland": () => `+48 ${RI(500,799)} ${RI(100,999)} ${RI(100,999)}`,
+      "Czechia": () => `+420 ${RI(600,799)} ${RI(100,999)} ${RI(100,999)}`,
+      "Hungary": () => `+36 20 ${RI(100,999)} ${RI(1000,9999)}`,
+      "Romania": () => `+40 7${RI(0,9)}${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Greece": () => `+30 69${RI(0,9)} ${RI(100,999)} ${RI(1000,9999)}`,
+      "Turkey": () => `+90 5${RI(0,5)} ${RI(100,999)} ${RI(1000,9999)}`,
+      "Russia": () => `+7 9${RI(0,9)}${RI(0,9)} ${RI(100,999)}-${RI(10,99)}-${RI(10,99)}`,
+      "Ukraine": () => `+380 ${RI(39,99)} ${RI(100,999)} ${RI(10,99)} ${RI(10,99)}`,
+      "Sweden": () => `+46 7${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Norway": () => `+47 4${RI(0,9)} ${RI(10,99)} ${RI(10,99)} ${RI(10,99)}`,
+      "Denmark": () => `+45 ${RI(20,29)} ${RI(10,99)} ${RI(10,99)} ${RI(10,99)}`,
+      "Switzerland": () => `+41 7${RI(0,9)} ${RI(100,999)} ${RI(10,99)} ${RI(10,99)}`,
+      "India": () => `+91 ${RI(60000,99999)} ${RI(10000,99999)}`,
+      "Pakistan": () => `+92 3${RI(0,9)} ${RI(100,999)} ${RI(1000000,9999999)}`,
+      "Bangladesh": () => `+880 1${RI(3,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Sri Lanka": () => `+94 7${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "Nepal": () => `+977 98${RI(0,9)}-${RI(100,999)}-${RI(1000,9999)}`,
+      "China": () => `+86 1${RI(3,9)}${RI(0,9)} ${RI(1000,9999)} ${RI(1000,9999)}`,
+      "Japan": () => `+81 0${RI(7,9)}-${RI(1000,9999)}-${RI(1000,9999)}`,
+      "South Korea": () => `+82 010-${RI(1000,9999)}-${RI(1000,9999)}`,
+      "Vietnam": () => `+84 0${RI(3,9)} ${RI(1000,9999)} ${RI(100,999)}`,
+      "Thailand": () => `+66 0${RI(6,9)}-${RI(1000,9999)}-${RI(100,999)}`,
+      "Israel": () => `+972 5${RI(0,9)}-${RI(100,999)}-${RI(1000,9999)}`,
+      "Iran": () => `+98 9${RI(0,9)}${RI(0,9)} ${RI(100,999)} ${RI(1000,9999)}`,
+      "Saudi Arabia": () => `+966 5${RI(0,9)} ${RI(100,999)} ${RI(100,999)}`,
+      "United Arab Emirates": () => `+971 5${RI(0,9)} ${RI(100,999)} ${RI(1000,9999)}`,
+      "South Africa": () => `+27 0${RI(6,8)} ${RI(100,999)} ${RI(1000,9999)}`,
+      "Nigeria": () => `+234 8${RI(0,1)}0 ${RI(100,999)} ${RI(1000,9999)}`,
+      "Brazil": () => `+55 ${RI(11,99)} ${RI(90000,99999)}-${RI(1000,9999)}`
+    };
+
+    // Currency map
+    const CUR = {
+      "United States":"USD","United Kingdom":"GBP","Eurozone":"EUR","Germany":"EUR","France":"EUR","Spain":"EUR","Italy":"EUR","Netherlands":"EUR","Portugal":"EUR","Ireland":"EUR","Belgium":"EUR","Austria":"EUR","Finland":"EUR","Greece":"EUR","Croatia":"EUR",
+      "Poland":"PLN","Czechia":"CZK","Hungary":"HUF","Romania":"RON","Bulgaria":"BGN","Sweden":"SEK","Norway":"NOK","Denmark":"DKK","Switzerland":"CHF",
+      "Russia":"RUB","Ukraine":"UAH","Belarus":"BYN","Turkey":"TRY","Serbia":"RSD","Bosnia and Herzegovina":"BAM","North Macedonia":"MKD",
+      "Canada":"CAD","Australia":"AUD","New Zealand":"NZD","Japan":"JPY","China":"CNY","India":"INR","Pakistan":"PKR","Bangladesh":"BDT","Sri Lanka":"LKR","Nepal":"NPR",
+      "Indonesia":"IDR","Malaysia":"MYR","Singapore":"SGD","Philippines":"PHP","Vietnam":"VND","Thailand":"THB","Israel":"ILS","Iran":"IRR",
+      "Saudi Arabia":"SAR","United Arab Emirates":"AED","Qatar":"QAR","Kuwait":"KWD","Jordan":"JOD","Egypt":"EGP","Morocco":"MAD","Algeria":"DZD","Tunisia":"TND","Libya":"LYD",
+      "South Africa":"ZAR","Nigeria":"NGN","Kenya":"KES","Tanzania":"TZS","Uganda":"UGX","Ghana":"GHS","Ethiopia":"ETB","Brazil":"BRL","Mexico":"MXN","Argentina":"ARS","Chile":"CLP","Peru":"PEN","Colombia":"COP","Uruguay":"UYU","Venezuela":"VES"
+    };
+
+    // IBAN support and length (subset but broad)
+    const IBAN_LEN = {
+      AT:20, AZ:28, BA:20, BE:16, BG:22, BH:22, BR:29, BY:28, CH:21, CR:22, CY:28, CZ:24,
+      DE:22, DK:18, DO:28, EE:20, ES:24, FI:18, FO:18, FR:27, GB:22, GE:22, GI:23, GL:18, GR:27, GT:28, HR:21,
+      HU:28, IE:22, IL:23, IQ:23, IS:26, IT:27, JO:30, KZ:20, KW:30, LB:28, LC:32, LI:21, LT:20, LU:20,
+      LV:21, MC:27, MD:24, ME:22, MK:19, MR:27, MT:31, MU:30, NL:18, NO:15, PK:24, PL:28, PS:29, PT:25, QA:29,
+      RO:24, RS:22, SA:24, SC:31, SE:24, SI:19, SK:24, SM:27, TL:23, TN:24, TR:26, UA:29, AE:23, VG:24
+    };
+    function iso2(country){
+      const map = {"United Kingdom":"GB","United States":"US","Netherlands":"NL","Czechia":"CZ","South Africa":"ZA","United Arab Emirates":"AE"};
+      // Quick heuristic: take first two letters otherwise
+      return map[country] || (country.slice(0,2).toUpperCase());
+    }
+    function makeIBAN(country){
+      const cc = iso2(country);
+      if(!(cc in IBAN_LEN)) return null;
+      const len = IBAN_LEN[cc];
+      // Build with country + checksum + BBAN digits/letters
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let bban = "";
+      for(let i=0;i<len-4;i++){ bban += chars[Math.floor(Math.random()*chars.length)]; }
+      const chk = RI(10,99);
+      return `${cc}${chk} ${bban.match(/.{1,4}/g).join(" ")}`;
+    }
+    function makeBIC(country){
+      const cc = iso2(country);
+      const bank = Array.from({length:4}, _=>AtoZ[RI(0,25)]).join("");
+      const loc  = AtoZ[RI(0,25)] + AtoZ[RI(0,25)];
+      const branch = Math.random()>0.5 ? (AtoZ[RI(0,25)] + AtoZ[RI(0,25)] + AtoZ[RI(0,25)]) : "";
+      return `${bank}${cc}${loc}${branch}`;
+    }
+
+    // Card brands per country
+    function cardBrands(country){
+      if(country==="China") return ["UnionPay","Visa","Mastercard"];
+      if(country==="Japan") return ["JCB","Visa","Mastercard"];
+      if(country==="India") return ["RuPay","Visa","Mastercard"];
+      if(country==="Russia") return ["MIR","Visa","Mastercard"];
+      if(country==="Turkey") return ["Troy","Visa","Mastercard"];
+      if(country==="Brazil") return ["Elo","Visa","Mastercard"];
+      if(country==="Nigeria") return ["Verve","Visa","Mastercard"];
+      return ["Visa","Mastercard"]; // global default
+    }
+    function luhnGen(prefix,len=16){
+      const d = Array(len).fill(0); d[0]=prefix; for(let i=1;i<len-1;i++) d[i]=RI(0,9);
+      let sum=0; for(let i=0;i<len-1;i++){ let x=d[i]; if(((len-1-i)%2)===1){ x*=2; if(x>9)x-=9; } sum+=x; }
+      d[len-1]=(10-(sum%10))%10; return d.join("");
+    }
+    function genCard(country){
+      const brand = R(cardBrands(country));
+      let number;
+      if(brand==="Visa") number = luhnGen(4);
+      else if(brand==="Mastercard") number = luhnGen(5);
+      else if(brand==="UnionPay") number = "62"+Array.from({length:14},()=>RI(0,9)).join("");
+      else if(brand==="JCB") number = "35"+Array.from({length:14},()=>RI(0,9)).join("");
+      else if(brand==="MIR") number = "220"+Array.from({length:13},()=>RI(0,9)).join("");
+      else if(brand==="RuPay") number = "608"+Array.from({length:13},()=>RI(0,9)).join("");
+      else if(brand==="Troy") number = "9792"+Array.from({length:12},()=>RI(0,9)).join("");
+      else if(brand==="Elo") number = "636368"+Array.from({length:10},()=>RI(0,9)).join("");
+      else if(brand==="Verve") number = "5061"+Array.from({length:12},()=>RI(0,9)).join("");
+      else number = luhnGen(4);
+      const exp = `${pad2(RI(1,12))}/${String(RI(26,35))}`;
+      const cvv = String(RI(100,999));
+      return {type: brand, num:number, exp, cvv};
+    }
+
+    // Government ID per country
+    function govProfile(country){
+      if(country==="Fantasy") return { label:"Citizen Mark", id:()=>`${R(['SIG','RUNE','GLYPH'])}-${RI(1000,9999)}-${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}` };
+      const map = {
+        "United States": {label:"SSN", id:()=>`${RI(100,899)}-${RI(10,99)}-${RI(1000,9999)}`},
+        "United Kingdom": {label:"NINo", id:()=>`${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(10,99)} ${RI(10,99)} ${AtoZ[RI(0,25)]}`},
+        "Canada": {label:"SIN", id:()=>`${RI(100,999)} ${RI(100,999)} ${RI(100,999)}`},
+        "Australia": {label:"TFN", id:()=>`${RI(100,999)} ${RI(100,999)} ${RI(100,999)}`},
+        "Germany": {label:"Steuer-ID", id:()=>`${RI(100,999)} ${RI(100,999)} ${RI(100,999)} ${RI(10,99)}`},
+        "France": {label:"INSEE", id:()=>`${RI(1,2)} ${RI(10,99)} ${RI(1,12)} ${RI(1,95)} ${RI(100,999)} ${RI(100,999)} ${RI(10,99)}`},
+        "Spain": {label:"DNI", id:()=>`${RI(10000000,99999999)}-${AtoZ[RI(0,25)]}`},
+        "Italy": {label:"Codice Fiscale", id:()=>`${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(10,99)}${AtoZ[RI(0,25)]}${RI(100,999)}${AtoZ[RI(0,25)]}${RI(100,999)}${AtoZ[RI(0,25)]}`},
+        "Netherlands": {label:"BSN", id:()=>`${RI(100000000,999999999)}`},
+        "Poland": {label:"PESEL", id:()=>`${RI(10,99)}${pad2(RI(1,12))}${pad2(RI(1,28))}${RI(10000,99999)}`},
+        "Czechia": {label:"Rodné číslo", id:()=>`${RI(10,99)}${pad2(RI(1,12))}${pad2(RI(1,28))}/${RI(100,999)}`},
+        "Hungary": {label:"Személyi szám", id:()=>`${RI(1000000000,9999999999)}`},
+        "Romania": {label:"CNP", id:()=>`${RI(1,8)}${RI(10,99)}${pad2(RI(1,12))}${pad2(RI(1,28))}${RI(100,999)}${RI(0,9)}`},
+        "Greece": {label:"AMKA", id:()=>`${pad2(RI(1,28))}${pad2(RI(1,12))}${RI(10,99)}${RI(10000,99999)}`},
+        "Turkey": {label:"TCKN", id:()=>`${RI(10000000000,99999999999)}`},
+        "Russia": {label:"SNILS", id:()=>`${RI(100,999)}-${RI(100,999)}-${RI(100,999)} ${RI(10,99)}`},
+        "Ukraine": {label:"RNOKPP", id:()=>`${RI(1000000000,9999999999)}`},
+        "Japan": {label:"My Number", id:()=>`${RI(1000,9999)}-${RI(1000,9999)}-${RI(1000,9999)}`},
+        "China": {label:"Resident ID", id:()=>`${RI(100000,999999)}${RI(1950,2004)}${pad2(RI(1,12))}${pad2(RI(1,28))}${RI(100,999)}`},
+        "India": {label:"Aadhaar", id:()=>`${RI(1000,9999)} ${RI(1000,9999)} ${RI(1000,9999)}`},
+        "Israel": {label:"Teudat Zehut", id:()=>`${RI(10000000,99999999)}`},
+        "Iran": {label:"National Code", id:()=>`${RI(1000000000,9999999999)}`},
+        "South Africa": {label:"ID Number", id:()=>`${RI(50,99)}${pad2(RI(1,12))}${pad2(RI(1,28))}${RI(1000,9999)}${RI(100,999)}`},
+        "Brazil": {label:"CPF", id:()=>`${RI(100,999)}.${RI(100,999)}.${RI(100,999)}-${RI(10,99)}`},
+        "Mexico": {label:"CURP", id:()=>`${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(1950,2004)}${pad2(RI(1,12))}${pad2(RI(1,28))}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(0,9)}${RI(0,9)}`}
+      };
+      return map[country] || {label:"National ID", id:()=>`ID-${RI(100000,999999)}`};
+    }
+
+    // Address / city generators (some localized bases)
+    const CITY_BASE = {
+      "United States":["New York","Los Angeles","Chicago","Houston","Phoenix","Philadelphia","San Diego","Dallas","San Jose","Austin","Boston","Seattle","Denver","Washington"],
+      "United Kingdom":["London","Birmingham","Manchester","Leeds","Glasgow","Sheffield","Liverpool","Bristol","Edinburgh","Cardiff","Belfast"],
+      "Canada":["Toronto","Montreal","Vancouver","Calgary","Edmonton","Ottawa","Winnipeg","Hamilton","Kitchener","Quebec City"],
+      "Australia":["Sydney","Melbourne","Brisbane","Perth","Adelaide","Gold Coast","Canberra","Wollongong","Geelong"],
+      "Germany":["Berlin","Hamburg","Munich","Cologne","Frankfurt","Stuttgart","Düsseldorf","Dortmund","Leipzig"],
+      "France":["Paris","Marseille","Lyon","Toulouse","Nice","Nantes","Strasbourg","Bordeaux","Lille"],
+      "Spain":["Madrid","Barcelona","Valencia","Seville","Zaragoza","Málaga","Palma","Bilbao","Alicante"],
+      "Italy":["Rome","Milan","Naples","Turin","Palermo","Genoa","Bologna","Florence","Bari","Catania"],
+      "Netherlands":["Amsterdam","Rotterdam","The Hague","Utrecht","Eindhoven","Tilburg","Groningen","Almere","Breda","Nijmegen"],
+      "Poland":["Warsaw","Kraków","Łódź","Wrocław","Poznań","Gdańsk"],
+      "Ukraine":["Kyiv","Kharkiv","Odesa","Dnipro","Lviv","Mariupol","Zaporizhzhia"],
+      "Russia":["Moscow","Saint Petersburg","Novosibirsk","Yekaterinburg","Kazan"]
+    };
+    const CITY_SUFFIX=["ville","ford","ton","mouth","bury","chester","borough","dale","view","field","bridge","side","stead","worth","port","vale","ridge"];
+    const CITY_PREFIX=["Green","Clear","Spring","Fair","River","Ash","Kings","Queens","Mill","Oak","Pine","Stone","Rock","New","Old","North","South","East","West"];
+    const STREET_PREFIX=["Oak","Pine","Maple","Cedar","Elm","Willow","Birch","Cherry","Walnut","Hickory","Aspen","Sycamore","Poplar","Chestnut","Spruce","Laurel","Magnolia","Juniper","Holly","Ivy","Silver","Golden","Kings","Queens","Victoria","Prince","Duke","Mill","River","Sunset","Meadow","Hill","Valley","Lake","Forest","Garden","Harbor","Bayside","Park","Station","Church","Union","Liberty","Grand","High","Low","Bridge","Stone","Rock","Fox","Deer","Eagle","Crown"];
+    const STREET_TYPE=["St","Street","Ave","Avenue","Rd","Road","Ln","Lane","Blvd","Boulevard","Dr","Drive","Ct","Court","Pl","Place","Ter","Terrace","Way","Close"];
+    function makeCity(country){ const base=CITY_BASE[country]; if(base) return R(base); return `${R(CITY_PREFIX)}${R(CITY_SUFFIX)}`; }
+    function postcode(country){ if(country==="United Kingdom") return String.fromCharCode(65+RI(0,25))+String.fromCharCode(65+RI(0,25))+RI(1,9)+' '+RI(1,9)+String.fromCharCode(65+RI(0,25))+String.fromCharCode(65+RI(0,25)); if(country==="Ukraine") return String(RI(1000,98999)); return String(RI(10000,99999)); }
+    function makeStreet(){ return `${R(STREET_PREFIX)} ${R(STREET_TYPE)}`; }
+    function makeAddress(country){
+      if(country==="Fantasy"){ const door=RI(1,9999); const streets=["Moonshadow Lane","Dragonspire Way","Aetherial Road","Whispering Grove","Ember Path","Rune Circle","Starlight Avenue","Frostfall Street"]; const cities=["Whiterun","Balmora","Solitude","Riften","Winterhold","Daggerfall","Raven Rock","Mournhold","Ald’ruhn","Cheydinhal","Skingrad","Bruma","Anvil","Vivec"]; const code=R(['IV-42','MK-7','DR-13','EL-88','DW-21']); return `${door} ${R(streets)}, ${R(cities)}, ${code}, Fantasy`; }
+      const num=RI(1,9999); return `${num} ${makeStreet()}, ${makeCity(country)}, ${postcode(country)}, ${country}`;
+    }
+
+    // Contact helpers
+    function phoneByCountry(country){ return (PHONE[country]||(()=>`+${RI(1,99)} ${RI(100,999)} ${RI(1000,9999)}`))(); }
+
+    function build(country){
+      const chosen = (country==='any') ? R(COUNTRY_LIST.filter(x=>x!=='Fantasy')) : country;
+      const gender = (chosen==='Fantasy') ? R(['Male','Female','Elf','Orc','Khajiit','Argonian']) : (Math.random()>0.5?'Male':'Female');
+      const name = makeNameByCountry(chosen, gender);
+      const dobY=RI(1950,2004), dobM=RI(1,12), dobD=RI(1,28);
+      const dob = `${pad2(dobD)}/${pad2(dobM)}/${dobY}`;
+      const now=new Date(), age=now.getFullYear()-dobY - (((now.getMonth()+1)<dobM || ((now.getMonth()+1)===dobM && now.getDate()<dobD))?1:0);
+
+      const idProf = govProfile(chosen);
+      const currency = CUR[chosen] || (["France","Germany","Spain","Italy","Netherlands","Portugal","Ireland","Belgium","Austria","Finland","Greece","Croatia"].includes(chosen) ? "EUR" : "USD");
+
+      // Finance
+      const card = (chosen==='Fantasy') ? {type:'Guild Credit Token', num:`${RI(1000,9999)}-${RI(1000,9999)}-${RI(1000,9999)}`, exp:`Era ${RI(1,9)}`, cvv:RI(100,999)} : genCard(chosen);
+      const iban = makeIBAN(chosen);
+      const bic = (iban? makeBIC(chosen) : null);
+
+      // Non-IBAN local details
+      let localBank = null;
+      if(!iban && chosen!=="Fantasy"){
+        if(chosen==="United States"){ localBank = {label:"Routing / Account", value:`${RI(100000000,999999999)} / ${RI(10000000,99999999)}`}; }
+        else if(chosen==="Canada"){ localBank = {label:"Transit/Institution/Account", value:`${pad2(RI(1,99))}${RI(0,9)}${RI(0,9)}-${RI(100,999)} / ${RI(1000000,9999999)}`}; }
+        else if(chosen==="Australia"){ localBank = {label:"BSB / Account", value:`${RI(100,999)}-${RI(100,999)} / ${RI(100000,999999)}`}; }
+        else if(chosen==="India"){ localBank = {label:"IFSC / Account", value:`${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(0,9)}${RI(0,9)}${RI(0,9)}${RI(0,9)} / ${RI(10000000000,99999999999)}`}; }
+        else { localBank = {label:"Account No", value:`${RI(10000000,999999999)}`}; }
+      }
+
+      return {
+        chosen, gender, name, dob, age, currency, idProf,
+        address: makeAddress(chosen),
+        phone: phoneByCountry(chosen),
+        card, iban, bic, localBank
+      };
+    }
+
+    // Render
+    function section(title, rows){
+      const sec=document.createElement('section'); sec.className='section';
+      const h=document.createElement('h3'); h.textContent=title; sec.appendChild(h);
+      const grid=document.createElement('div'); grid.className='grid';
+      rows.forEach(([k,v,isHtml])=>{
+        const lk=document.createElement('div'); lk.className='label'; lk.textContent=k;
+        const lv=document.createElement('div'); lv.className='value'; if(isHtml) lv.innerHTML=v; else lv.textContent=v;
+        grid.appendChild(lk); grid.appendChild(lv);
+      });
+      sec.appendChild(grid); return sec;
+    }
+
+    async function render(data){
+      const recordEl=document.getElementById('record');
+      recordEl.classList.remove('hidden');
+      recordEl.innerHTML='';
+
+      const wrap=document.createElement('div'); wrap.className='sections';
+
+      wrap.appendChild(section('Identity', [['Name', data.name],['Gender', data.gender],['DOB', data.dob],['Age', String(data.age)]]));
+      wrap.appendChild(section('Location', [['Address', data.address],['Country', data.chosen]]));
+      wrap.appendChild(section('Contact', [['Phone', data.phone],['Email', '<a class="link-btn" href="#">Click here to get a real email</a>', true]]));
+
+      const govTitle = (data.chosen==='Fantasy')?'Guild & Papers':'Government IDs';
+      wrap.appendChild(section(govTitle, [[data.idProf.label, data.idProf.id()],['Passport', (data.chosen==='Fantasy'?`Travel Writ ${RI(100000,999999)}` : `${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}${RI(1000000,9999999)}`)],[(data.chosen==='Fantasy'?'Rider Permit':'Driving Licence'), `${AtoZ[RI(0,25)]}${AtoZ[RI(0,25)]}-${RI(100000,999999)}`]]));
+
+      const finRows = [];
+      finRows.push([(data.chosen==='Fantasy'?'Guild Token':'Card'), `${data.card.type} ${data.card.num} (Exp: ${data.card.exp}${data.chosen==='Fantasy'?'':(' CVV:'+data.card.cvv)})`]);
+      if(data.iban){ finRows.push(['IBAN', data.iban]); finRows.push(['BIC/SWIFT', data.bic]); }
+      if(data.localBank){ finRows.push([data.localBank.label, data.localBank.value]); }
+      finRows.push(['Currency', data.currency]);
+      wrap.appendChild(section('Finance', finRows));
+
+      wrap.appendChild(section('Misc', [['Timezone', R(["UTC-08:00","UTC-05:00","UTC+00:00","UTC+01:00","UTC+02:00","UTC+03:00","UTC+05:30","UTC+08:00","UTC+10:00"])]]));
+
+      recordEl.appendChild(wrap);
+      }
+
+    async function generate(){
+      try{
+        const c = document.getElementById('country').value;
+        const data = build(c);
+        await render(data);
+        const e=document.getElementById('error'); e.classList.add('hidden'); e.textContent='';
+      }catch(err){
+        console.error(err);
+        const e=document.getElementById('error'); e.classList.remove('hidden'); e.textContent='Error: '+err.message;
+      }
+    }
+
+    window._gen = generate;
+    document.getElementById('generate').addEventListener('click', generate);
+  });
+})();
+</script>
+
+</body>
+</html>

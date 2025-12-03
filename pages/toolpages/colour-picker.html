@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+  <style>
+  
+    :root{
+      --bg:#0b0b0e; --panel:#121219; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --space-0:0; --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem;
+      --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --r-1:.375rem; --r-2:.75rem; --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      --dur-fast:.15s; --dur:.25s; --dur-slow:.5s; --ease:cubic-bezier(.2,.7,.2,1);
+      --font:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Utilities */
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .stack{display:flex;flex-direction:column}
+    .stack>*+*{margin-top:var(--space-4)}
+    .grid{display:grid;gap:var(--space-4)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .btn{--btn-bg:transparent;--btn-text:var(--text);--btn-border:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-text);font-weight:700;transition:transform var(--dur) var(--ease), background var(--dur), border-color var(--dur);outline-offset:3px}
+    .btn:hover{transform:translateY(-1px);text-decoration:none}
+    .btn--primary{--btn-bg:var(--accent);--btn-text:#0e061d;--btn-border:transparent}
+    .btn--ghost{--btn-bg:rgba(255,255,255,.06)}
+    .btn:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:999px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.55);color:#e6dbff;font-size:.9rem}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:var(--space-4);top:var(--space-4);z-index:1000;padding:.5rem .75rem;border-radius:var(--r-1);background:var(--accent);color:#0e061d;font-weight:800;transform:translateY(-200%);transition:transform var(--dur) var(--ease)}
+    .skip-link:focus{transform:none}
+
+    /* Header */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:var(--space-3) 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent;transition:border-color var(--dur), background var(--dur)}
+    .nav__link:hover{text-decoration:none;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .nav__link:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    /* Minimal hero */
+    .intro{position:relative;isolation:isolate;text-align:center;padding:clamp(2rem,6vw,5rem) 0 var(--space-8);background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title--brand{margin:.2rem auto .6rem auto;line-height:1.02;font-size:clamp(2rem,5vw,3rem);font-weight:1000;letter-spacing:.5px;text-transform:uppercase}
+    .intro__subtitle{margin:.2rem auto 0 auto;font-size:clamp(1.1rem,3.5vw,1.25rem);font-weight:800;color:var(--muted)}
+
+    /* Category quick-jump chips */
+    .catnav{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+
+    /* Sections & Tiles */
+    .section{padding:var(--space-12) 0}
+    .section__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;margin-bottom:var(--space-6)}
+    .tiles{grid-template-columns:1fr}
+    @media (min-width:48rem){.tiles{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:76rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+
+    .tile{position:relative;display:flex;flex-direction:column;min-height:220px;border-radius:var(--r-2);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);transition:transform var(--dur) var(--ease), border-color var(--dur), background var(--dur)}
+    .tile:hover{transform:translateY(-3px);text-decoration:none;border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.08)}
+    .tile__media{aspect-ratio:16/9;background:radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%),linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));display:grid;place-items:center;color:#e9deff;font-size:1.75rem}
+    .tile__body{padding:var(--space-6);display:flex;flex-direction:column;gap:.5rem}
+    .tile__title{font-size:1.1rem;margin:0;font-weight:900}
+    .tile__desc{color:var(--muted);margin:0}
+
+    /* Go circle */
+    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
+    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
+    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+
+    /* Reveal-on-scroll */
+    .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
+    .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
+
+    /* Footer */
+    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer__grid{display:grid;gap:var(--space-6)}
+    @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
+    .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
+    .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
+    .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+  
+
+  .tool-card{max-width:980px;margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45);padding:1.2rem;}
+  .intro__title{margin:.2rem auto .4rem auto;line-height:1.02;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:1000;letter-spacing:.4px}
+  .intro__subtitle{margin:0 auto;color:var(--muted);font-weight:800}
+
+  .seg{display:flex;gap:8px;padding:6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:12px;height:46px;align-items:center}
+  .seg input{display:none}
+  .seg label{flex:1;display:flex;align-items:center;justify-content:center;height:100%;border-radius:10px;font-weight:800;color:#e7e6ff;text-align:center;padding:0 10px;line-height:1.2}
+  .seg input:checked + label{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d}
+
+  .upload-box{border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.07);border-radius:12px;padding:12px;text-align:center}
+  .upload-box small{display:block;margin-top:6px;color:var(--muted);font-weight:700}
+
+  .stage{display:none;position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a0f1a;margin-top:1rem;text-align:center}
+  .stage.show{display:block}
+  #canvas{max-width:100%;max-height:70vh;background:#0b0f18;display:inline-block;image-rendering:pixelated;cursor:crosshair}
+
+  /* Large circular magnifier that mimics the system picker */
+  .magnifier{position:absolute;pointer-events:none;width:180px;height:180px;border-radius:50%;border:2px solid #fff;overflow:hidden;display:none;box-shadow:0 8px 24px rgba(0,0,0,.55);background:#111}
+  .magnifier canvas{width:100%;height:100%}
+
+  .readout{display:none;place-items:center;margin:1rem 0 .5rem}
+  .readout.show{display:grid}
+  .readout-inner{display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:12px;padding:12px 16px}
+  .chip{width:46px;height:46px;border-radius:10px;border:1px solid rgba(255,255,255,.18)}
+  .mono{font-family:ui-monospace, Menlo, Consolas, monospace;font-weight:700}
+
+  .center-actions{display:none;place-items:center;margin-top:8px}
+  .center-actions.show{display:grid}
+  .btn-copy{display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.15rem;border-radius:999px;border:0;background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;font-weight:900;min-width:160px;cursor:pointer;margin:0 8px}
+  .btn-copy:disabled{opacity:.6;cursor:not-allowed}
+
+  .hint{color:var(--muted);font-size:.9rem;text-align:center}
+  .hidden{display:none !important}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+<div class="container mast">
+<nav aria-label="Primary" class="nav">
+<ul class="nav__list">
+
+<!-- NAVIGATION BAR -->
+<li><a class="nav__link" href="home.html">Home</a></li>
+<li><a class="nav__link nav__link--highlight" href="about.html">About</a></li>
+<li><a class="nav__link" href="tools.html">Tools</a></li>
+<li><a class="nav__link" href="contact.html">Contact</a></li>
+<li><a class="nav__link" href="privacy.html">Privacy</a></li>
+<li><a class="nav__link" href="terms.html">Terms</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+  <main id="main">
+    <section class="intro">
+      <div class="container">
+        <h1 class="intro__title">Image Colour Picker</h1>
+        <p class="intro__subtitle">Toggle between uploading an image or picking any colour on your screen.</p>
+      </div>
+    </section>
+
+    <section class="tool">
+      <div class="container">
+        <div class="tool-card">
+
+          <label>Mode</label>
+          <div class="seg" role="radiogroup" aria-label="Mode">
+            <input type="radio" id="m-upload" name="mode" value="upload" checked>
+            <label for="m-upload">Upload image</label>
+            <input type="radio" id="m-screen" name="mode" value="screen">
+            <label for="m-screen">Pick from screen</label>
+          </div>
+
+          <div id="section-upload" style="margin:14px 0 0 0">
+            <label>Upload image</label>
+            <div class="upload-box">
+              <input id="file" type="file" accept="image/*" />
+              <small>or drag and drop an image here</small>
+            </div>
+          </div>
+
+          <div id="section-screen" class="hidden" style="margin:14px 0 0 0">
+            <label>Pick from screen</label>
+            <div class="center-actions" style="margin:0;display:grid">
+              <button id="btnEyedrop" class="btn-copy" type="button">Pick colour</button>
+            </div>
+            <p class="hint" id="edHint">Use your browser's eyedropper to pick any on-screen colour.</p>
+          </div>
+
+          <div id="stage" class="stage" aria-live="polite">
+            <canvas id="canvas" width="1" height="1"></canvas>
+            <div class="magnifier" id="magnifier"><canvas id="magCanvas"></canvas></div>
+          </div>
+
+          <div class="readout" id="readout">
+            <div class="readout-inner">
+              <div id="chip" class="chip"></div>
+              <div class="mono" id="hexLine">HEX: <span id="hex"></span></div>
+              <div class="mono" id="rgbLine">RGB: <span id="rgb"></span></div>
+            </div>
+          </div>
+          <div class="center-actions" id="copyBtns">
+            <div>
+              <button class="btn-copy" id="copyHex" data-copy="#hex">Copy HEX</button>
+              <button class="btn-copy" id="copyRgb" data-copy="#rgb">Copy RGB</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
+<div class="container" style="text-align:center">
+<p class="fine" style="margin:0">
+        © <span id="year">2025</span> riyst.com
+      </p>
+</div>
+</footer>
+
+  <script>
+    const canvas=document.getElementById("canvas"), ctx=canvas.getContext("2d",{willReadFrequently:true});
+    const chip=document.getElementById("chip"), hexEl=document.getElementById("hex"), rgbEl=document.getElementById("rgb"), stage=document.getElementById("stage");
+    const readout=document.getElementById("readout"), copyBtns=document.getElementById("copyBtns");
+    const fileInput=document.getElementById("file"), btnEyedrop=document.getElementById("btnEyedrop"), edHint=document.getElementById("edHint");
+    const magnifier=document.getElementById("magnifier"), magCanvas=document.getElementById("magCanvas"), magCtx=magCanvas.getContext("2d",{willReadFrequently:true});
+    magCanvas.width=180; magCanvas.height=180;
+    let img=new Image(); img.crossOrigin="anonymous"; let hasImage=false;
+
+    function resetOutputs(){ readout.classList.remove("show"); copyBtns.classList.remove("show"); hexEl.textContent=""; rgbEl.textContent=""; }
+    resetOutputs();
+
+    
+    document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener("change",e=>{
+      const isUpload = e.target.value === "upload";
+      document.getElementById("section-upload").classList.toggle("hidden", !isUpload);
+      document.getElementById("section-screen").classList.toggle("hidden", isUpload);
+
+      if (!isUpload) {
+        // Switching to screen picker: wipe uploaded image and reset UI
+        hasImage = false;
+        if (fileInput) fileInput.value = "";
+        stage.classList.remove("show");
+        magnifier.style.display = "none";
+        // Clear canvas to 1x1 transparent pixel so it doesn't capture clicks
+        canvas.width = 1; canvas.height = 1;
+        const c2 = canvas.getContext("2d", { willReadFrequently: true });
+        c2.clearRect(0,0,1,1);
+        resetOutputs();
+      }
+    }));
+    
+
+    if(!("EyeDropper" in window)){ btnEyedrop.disabled=true; if(edHint) edHint.textContent="Your browser does not support on-screen colour picking."; }
+
+    fileInput.addEventListener("change",async e=>{ const f=e.target.files[0]; if(!f)return; const url=URL.createObjectURL(f); await loadImage(url); URL.revokeObjectURL(url); resetOutputs(); });
+
+    btnEyedrop?.addEventListener("click",async()=>{ if(!("EyeDropper" in window))return; try{ const ed=new EyeDropper(); const res=await ed.open(); const {r,g,b}=hexToRgb(res.sRGBHex); setCurrent(r,g,b);}catch{} });
+
+    canvas.addEventListener("mouseenter",()=>{ if(hasImage) magnifier.style.display="block"; });
+    canvas.addEventListener("mouseleave",()=>{ magnifier.style.display="none"; });
+
+    canvas.addEventListener("mousemove",e=>{
+      if(!hasImage)return;
+      const rect=canvas.getBoundingClientRect();
+      const cx=Math.floor(e.clientX-rect.left);
+      const cy=Math.floor(e.clientY-rect.top);
+      if(cx<0||cy<0||cx>=canvas.width||cy>=canvas.height){ magnifier.style.display="none"; return; }
+
+      // Zoomed crop around the cursor from the canvas
+      const srcSize=21; // odd so we have a center pixel
+      const half=(srcSize-1)/2;
+      magCtx.imageSmoothingEnabled=false;
+      magCtx.clearRect(0,0,magCanvas.width,magCanvas.height);
+      magCtx.drawImage(canvas, cx-half, cy-half, srcSize, srcSize, 0, 0, magCanvas.width, magCanvas.height);
+
+      // Draw grid to mimic system loupe
+      const step = magCanvas.width / srcSize;
+      magCtx.beginPath();
+      for(let i=0;i<=srcSize;i++){
+        const pos=Math.round(i*step)+0.5;
+        magCtx.moveTo(pos,0); magCtx.lineTo(pos,magCanvas.height);
+        magCtx.moveTo(0,pos); magCtx.lineTo(magCanvas.width,pos);
+      }
+      magCtx.strokeStyle="rgba(255,255,255,.6)";
+      magCtx.lineWidth=1;
+      magCtx.stroke();
+
+      // Highlight center pixel
+      const c0 = Math.floor(half)*step;
+      magCtx.strokeStyle="#000";
+      magCtx.lineWidth=2;
+      magCtx.strokeRect(c0, c0, step, step);
+      magCtx.strokeStyle="#fff";
+      magCtx.lineWidth=1;
+      magCtx.strokeRect(c0, c0, step, step);
+
+      // Position magnifier around cursor
+      const mSize=magCanvas.width;
+      magnifier.style.left=(e.clientX - mSize/2) + "px";
+      magnifier.style.top=(e.clientY - mSize/2 + window.scrollY) + "px";
+      magnifier.style.display="block";
+    });
+
+    canvas.addEventListener("click",e=>{
+      if(!hasImage)return;
+      const rect=canvas.getBoundingClientRect();
+      const cx=Math.floor(e.clientX-rect.left);
+      const cy=Math.floor(e.clientY-rect.top);
+      const d=ctx.getImageData(cx,cy,1,1).data;
+      setCurrent(d[0],d[1],d[2]);
+    });
+
+    async function loadImage(src){
+      return new Promise((res,rej)=>{
+        img=new Image(); img.crossOrigin="anonymous";
+        img.onload=()=>{hasImage=true;draw();res();};
+        img.onerror=rej; img.src=src;
+      });
+    }
+    function draw(){
+      stage.classList.add("show");
+      const maxW=stage.clientWidth-16, maxH=Math.min(580, window.innerHeight*0.7);
+      const w=img.width, h=img.height;
+      const s=Math.min(maxW/w, maxH/h, 1);
+      const dw=Math.floor(w*s), dh=Math.floor(h*s);
+      canvas.width=dw; canvas.height=dh;
+      const dx=0, dy=0;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, dx, dy, dw, dh);
+    }
+
+    function setCurrent(r,g,b){
+      const hex=rgbToHex(r,g,b);
+      chip.style.background=hex;
+      hexEl.textContent=hex;
+      rgbEl.textContent=`(${r}, ${g}, ${b})`;
+      readout.classList.add("show");
+      copyBtns.classList.add("show");
+    }
+    document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{
+      const sel=b.getAttribute("data-copy"); const el=document.querySelector(sel);
+      try{ await navigator.clipboard.writeText(el.textContent.trim()); const orig=b.textContent; b.textContent="Copied!"; setTimeout(()=>b.textContent=orig,900);}catch{}
+    }));
+
+    function rgbToHex(r,g,b){return"#"+[r,g,b].map(x=>x.toString(16).padStart(2,"0")).join("").toUpperCase();}
+    function hexToRgb(h){h=h.replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");return{r:parseInt(h.substr(0,2),16),g:parseInt(h.substr(2,2),16),b:parseInt(h.substr(4,2),16)};}
+  </script>
+</body>
+</html>

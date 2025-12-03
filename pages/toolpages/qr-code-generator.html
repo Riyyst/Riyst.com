@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+
+<!-- Style -->
+  <style>
+    :root{ --bg:#0b0b0e; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+           --panel:#121219; --max-w:1100px; --ctl-h:46px; --gap:14px; --radius:12px; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+
+    /* Header / Footer (unchanged) */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:1rem 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent}
+    .nav__link:hover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6);text-decoration:none}
+    footer.site-footer{padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.06);text-align:center}
+
+    /* Card + layout (same as before) */
+    .tool{padding:2rem 0 3rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45);padding:1.4rem}
+    .row{display:flex;gap:var(--gap);flex-wrap:wrap;align-items:flex-start}
+    .left{flex:1 1 420px;min-width:300px;max-width:520px}
+    .right{flex:1 1 420px;min-width:300px}
+
+    label{font-size:.85rem;color:var(--muted);display:block;margin:.25rem 0 .35rem}
+    input[type="text"], input[type="color"], select{height:var(--ctl-h);width:100%;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#e7e6ff;outline:none}
+    input[type="color"]{padding:0 6px}
+
+    /* Segmented radios (same look as before) */
+    .seg{display:flex;gap:8px;padding:6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:12px;height:var(--ctl-h);align-items:center}
+    .seg input{display:none}
+    .seg label{flex:1;display:flex;align-items:center;justify-content:center;height:100%;border-radius:10px;font-weight:800;color:#e7e6ff;text-align:center;padding:0 6px;line-height:1.2;white-space:normal}
+    .seg input:checked + label{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d}
+
+    /* Drop zone + preview with X */
+    .drop{position:relative;min-height:var(--ctl-h);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;border-radius:12px;border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:#e7e6ff;font-weight:800;text-align:center}
+    .drop input[type="file"]{display:none}
+    .drop.dragover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .logo-preview{display:none; align-items:center; gap:10px; width:100%; justify-content:flex-start}
+    .logo-preview img{width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,255,255,.18);object-fit:cover}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:transparent;color:#e7e6ff;cursor:pointer}
+    .icon-btn:hover{background:rgba(255,255,255,.08)}
+
+    /* Buttons — accent gradient (no glow) */
+    .actions{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1.05rem;border-radius:999px;border:1px solid transparent;background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;font-weight:900;transition:transform .06s ease;box-shadow:none}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn[disabled]{opacity:.55;cursor:not-allowed;filter:saturate(.4) brightness(.9)}
+    @media (min-width: 980px){ .logo-align{ margin-top: 52px; } }
+
+    
+    .btn.accent{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;
+                font-weight:900;border:none;box-shadow:0 6px 18px rgba(139,92,246,.35)}
+    .btn.accent:hover{transform:translateY(-1px)}
+    .btn.accent:active{transform:translateY(0)}
+
+
+    /* Preview: keep fixed even when empty */
+    .canvas{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a0f1a;display:flex;justify-content:center;min-height:376px}
+    #previewBox{padding:8px;min-height:360px}
+    #qrMount{display:grid;place-items:center;min-height:360px}
+  
+  /* === Overrides (final polish) === */
+  .btn { box-shadow: none !important; animation: none !important; }
+  .btn:hover { transform: translateY(-1px); animation: none !important; }
+  @keyframes pulse {}
+  @media (min-width: 980px){ .logo-align { margin-top: 64px !important; } }
+  #format { width: 100% !important; }
+  .drop { width: 100%; }
+
+  /* Pair row ensures equal widths & heights */
+  .pair-row { margin-top: 14px; }
+  .pair { flex: 1 1 0; min-width: 280px; }
+  .pair .box { height: var(--ctl-h); display:flex; align-items:center; justify-content:center; width:100%; }
+  .actions.equal { gap: 12px; }
+  .actions.equal .btn.box { flex: 1 1 0; height: var(--ctl-h); border-radius: 12px; }
+  .drop.box { border-style: dashed; }
+  .btn { box-shadow: none; }
+
+</style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../home.html">Home</a></li>
+          <li><a class="nav__link" href="../about.html">About</a></li>
+          <li><a class="nav__link" href="../tools.html">Tools</a></li>
+          <li><a class="nav__link" href="../contact.html">Contact</a></li>
+          <li><a class="nav__link" href="../privacy.html">Privacy</a></li>
+          <li><a class="nav__link" href="../terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool">
+      <div class="container card">
+        <div class="row">
+          <!-- LEFT: controls (unchanged) -->
+          <div class="left">
+            <label for="qrText">URL</label>
+            <input id="qrText" type="text" placeholder="https://riyst.com" />
+
+            <div style="margin-top:var(--gap)">
+              <label>Dots</label>
+              <div class="seg" role="radiogroup" aria-label="Dots shape">
+                <input type="radio" id="d-square" name="dots" value="square" checked/><label for="d-square">Square</label>
+                <input type="radio" id="d-rounded" name="dots" value="rounded"/><label for="d-rounded">Rounded</label>
+                <input type="radio" id="d-dots" name="dots" value="dots"/><label for="d-dots">Dots</label>
+                <input type="radio" id="d-classy" name="dots" value="classy"/><label for="d-classy">Classy</label>
+                <input type="radio" id="d-classy-rounded" name="dots" value="classy-rounded"/><label for="d-classy-rounded">Classy Rounded</label>
+                <input type="radio" id="d-extra" name="dots" value="extra-rounded"/><label for="d-extra">Extra Rounded</label>
+              </div>
+            </div>
+
+            <div style="margin-top:var(--gap)">
+              <label>Eyes</label>
+              <div class="seg" role="radiogroup" aria-label="Eye style">
+                <input type="radio" id="e-square" name="eyes" value="square" checked/><label for="e-square">Square Eyes</label>
+                <input type="radio" id="e-rounded" name="eyes" value="extra-rounded"/><label for="e-rounded">Rounded Eyes</label>
+              </div>
+            </div>
+
+            <div style="margin-top:var(--gap)">
+              <label>Eye dots</label>
+              <div class="seg" role="radiogroup" aria-label="Eye dot style">
+                <input type="radio" id="ed-square" name="eyeDots" value="square" checked/><label for="ed-square">Square</label>
+                <input type="radio" id="ed-dot" name="eyeDots" value="dot"/><label for="ed-dot">Round</label>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:var(--gap)">
+              <div style="flex:1 1 160px;min-width:160px">
+                <label for="dotColor">Dots colour</label>
+                <input id="dotColor" type="color" value="#000000" />
+              </div>
+              <div style="flex:1 1 160px;min-width:160px">
+                <label for="bgColor">Background</label>
+                <input id="bgColor" type="color" value="#ffffff" />
+                <div style="display:flex;gap:8px;align-items:center;margin-top:.5rem">
+                  <input id="bgTransparent" type="checkbox" />
+                  <label for="bgTransparent" style="margin:0;color:var(--muted);font-size:.85rem">Transparent background</label>
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- RIGHT: preview (same place) -->
+          <div class="right">
+<div class="canvas"><div id="previewBox"><div id="qrMount" aria-live="polite"></div></div></div>
+
+            
+          </div>
+        </div>
+      
+            <div class="row pair-row" style="align-items:stretch">
+
+              <div class="col pair">
+                <label class="section-label">Logo (optional)</label>
+                <div class="drop box" id="logoDrop">
+                  <span class="logo-cta">Drop or click to upload</span>
+                  <div class="logo-preview" id="logoPreview">
+                    <img id="logoThumb" alt="" />
+                    <span id="logoName" style="font-weight:700"></span>
+                    <button id="btnClearLogo" type="button" class="icon-btn" aria-label="Remove logo">&times;</button>
+                  </div>
+                  <input id="logoFile" type="file" accept="image/*" />
+                </div>
+              </div>
+
+              <div class="col pair">
+                <label class="section-label" for="format" style="text-align:left">Download as</label>
+              <select id="format" style="height:var(--ctl-h);width:100%;border-radius:12px;padding:0 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:var(--text)">
+                <option value="png" selected>PNG</option>
+                <option value="svg">SVG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="webp">WEBP</option>
+              </select>
+                <div class="actions equal" style="margin-top:.8rem;justify-content:center;width:100%">
+                  <button id="btnDownload" class="btn box">Download</button>
+                  <button id="btnCopy" class="btn box">Copy</button>
+                </div>
+              </div>
+            </div>
+</div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container">© <span id="year">2025</span> riyst.com</div></footer>
+
+  <script>
+    (function(){const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();
+
+    const qrText = document.getElementById('qrText');
+    const format = document.getElementById('format');
+    const dotColor = document.getElementById('dotColor');
+    const bgColor = document.getElementById('bgColor');
+    const bgTransparent = document.getElementById('bgTransparent');
+    const logoFile = document.getElementById('logoFile');
+    const logoDrop = document.getElementById('logoDrop');
+    const logoPreview = document.getElementById('logoPreview');
+    const logoThumb = document.getElementById('logoThumb');
+    const logoName = document.getElementById('logoName');
+    const mount = document.getElementById('qrMount');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnClearLogo = document.getElementById('btnClearLogo');
+
+    const dotsRadios = Array.from(document.querySelectorAll('input[name="dots"]'));
+    const eyesRadios = Array.from(document.querySelectorAll('input[name="eyes"]'));
+    const eyeDotsRadios = Array.from(document.querySelectorAll('input[name="eyeDots"]'));
+
+    const FIXED_SIZE = 360;
+    const FIXED_MARGIN = 10;
+    const FIXED_ECC = 'H';
+    const DEFAULT_LOGO_SIZE_PCT = 24;
+    const DEFAULT_LOGO_MARGIN = 2;
+    let logoDataUrl = null;
+    const state = { dotsType:'square', cornersType:'square', cornersDotType:'square' };
+    (function initStateFromRadios(){
+      const d=document.querySelector('input[name="dots"]:checked'); if(d) state.dotsType=d.value;
+      const e=document.querySelector('input[name="eyes"]:checked'); if(e) state.cornersType=(e.value==='square')?'square':'extra-rounded';
+      const ed=document.querySelector('input[name="eyeDots"]:checked'); if(ed) state.cornersDotType=ed.value;
+    })();
+
+    // QR instance
+    let qr = new QRCodeStyling({
+      width: FIXED_SIZE,
+      height: FIXED_SIZE,
+      type: 'canvas',
+      data: '',
+      margin: FIXED_MARGIN,
+      qrOptions: { errorCorrectionLevel: FIXED_ECC },
+      backgroundOptions: { color: bgColor.value },
+      dotsOptions: { color: dotColor.value, type: state.dotsType },
+      cornersSquareOptions: { type: state.cornersType, color: dotColor.value },
+      cornersDotOptions: { type: state.cornersDotType, color: dotColor.value },
+      imageOptions: { imageSize: DEFAULT_LOGO_SIZE_PCT/100, margin: DEFAULT_LOGO_MARGIN, crossOrigin: 'anonymous' }
+    });
+    qr.append(mount);
+
+    function mapDotsType(v){
+      if(v==='rounded') return 'rounded';
+      if(v==='dots') return 'dots';
+      if(v==='classy') return 'classy';
+      if(v==='classy-rounded') return 'classy-rounded';
+      if(v==='extra-rounded') return 'extra-rounded';
+      return 'square';
+    }
+
+    function refresh(){
+      const bg = bgTransparent.checked ? 'transparent' : bgColor.value;
+      qr.update({
+        width: FIXED_SIZE, height: FIXED_SIZE, data: qrText.value || '', margin: FIXED_MARGIN,
+        qrOptions: { errorCorrectionLevel: FIXED_ECC },
+        backgroundOptions: { color: bg },
+        dotsOptions: { color: dotColor.value, type: mapDotsType(state.dotsType) },
+        cornersSquareOptions: { type: state.cornersType, color: dotColor.value },
+        cornersDotOptions: { type: state.cornersDotType, color: dotColor.value },
+        image: logoDataUrl || null,
+        imageOptions: { imageSize: DEFAULT_LOGO_SIZE_PCT/100, margin: DEFAULT_LOGO_MARGIN, crossOrigin:'anonymous' }
+      });
+    }
+
+    // Segments
+    dotsRadios.forEach(r => r.addEventListener('change', ()=>{ state.dotsType = r.value; refresh(); }));
+    eyesRadios.forEach(r => r.addEventListener('change', ()=>{
+      if(r.value==='square'){ state.cornersType='square'; }
+      else { state.cornersType='extra-rounded'; }
+      refresh();
+    }));
+
+    eyeDotsRadios.forEach(r => r.addEventListener('change', ()=>{
+      state.cornersDotType = r.value; // 'square' or 'dot'
+      refresh();
+    }));
+
+    [qrText, dotColor, bgColor, bgTransparent].forEach(el => { el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
+
+    // Logo upload / preview / remove
+    logoFile.addEventListener('change', handleLogoFile);
+    ['dragenter','dragover'].forEach(ev => logoDrop.addEventListener(ev, e => { e.preventDefault(); logoDrop.classList.add('dragover'); }));
+    ['dragleave','drop'].forEach(ev => logoDrop.addEventListener(ev, e => { e.preventDefault(); logoDrop.classList.remove('dragover'); }));
+    logoDrop.addEventListener('drop', e => { const file = e.dataTransfer.files && e.dataTransfer.files[0]; if(file) setLogoFile(file); });
+    logoDrop.addEventListener('click', (e) => { if(e.target.closest('#btnClearLogo')) return; logoFile.click(); });
+
+    function handleLogoFile(e){ const file = e.target.files && e.target.files[0]; if(file) setLogoFile(file); }
+    function setLogoFile(file){
+      if(!file || !file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = () => { logoDataUrl = reader.result; showLogoPreview(file); refresh(); };
+      reader.readAsDataURL(file);
+    }
+    function showLogoPreview(file){
+      const name = file.name || 'logo';
+      logoThumb.src = logoDataUrl; logoThumb.alt = name; logoName.textContent = name;
+      document.querySelector('.logo-cta').style.display='none';
+      logoPreview.style.display='flex';
+    }
+    btnClearLogo.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); clearLogo(); });
+    function clearLogo(){
+      logoDataUrl=null; logoFile.value=''; logoThumb.src=''; logoName.textContent='';
+      logoPreview.style.display='none'; document.querySelector('.logo-cta').style.display=''; refresh();
+    }
+
+    // Download & Copy (same behavior as before) 
+    btnDownload.addEventListener('click', async () => {
+      const ext = format.value||'png';
+      if(ext==='svg'){ const t=qr._options.type; qr.update({type:'svg'}); await qr.download({name:'qr-code',extension:'svg'}); qr.update({type:t}); }
+      else{ await qr.download({name:'qr-code',extension:ext}); }
+    });
+    btnCopy.addEventListener('click', async () => {
+      try{
+        const t=qr._options.type; qr.update({type:'canvas'});
+        const dataUrl = await qr.getRawData('png');
+        const blob = await (await fetch(dataUrl)).blob();
+        await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+        qr.update({type:t});
+        btnCopy.textContent = 'Copied!'; setTimeout(()=> btnCopy.textContent='Copy', 900);
+      }catch(e){ btnCopy.textContent='Copy failed'; setTimeout(()=> btnCopy.textContent='Copy', 900); }
+    });
+
+    // Initial
+    if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', refresh);} else { refresh(); }
+  </script>
+</body>
+</html>

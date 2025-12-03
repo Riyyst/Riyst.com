@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>News &amp; Updates</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+<style>
+    :root{
+      --bg:#0b0b0e; --panel:#121219; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --space-0:0; --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem;
+      --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --r-1:.375rem; --r-2:.75rem; --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      --dur-fast:.15s; --dur:.25s; --dur-slow:.5s; --ease:cubic-bezier(.2,.7,.2,1);
+      --font:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Utilities */
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .stack{display:flex;flex-direction:column}
+    .stack>*+*{margin-top:var(--space-4)}
+    .grid{display:grid;gap:var(--space-4)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .btn{--btn-bg:transparent;--btn-text:var(--text);--btn-border:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-text);font-weight:700;transition:transform var(--dur) var(--ease), background var(--dur), border-color var(--dur);outline-offset:3px}
+    .btn:hover{transform:translateY(-1px);text-decoration:none}
+    .btn--primary{--btn-bg:var(--accent);--btn-text:#0e061d;--btn-border:transparent}
+    .btn--ghost{--btn-bg:rgba(255,255,255,.06)}
+    .btn:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:999px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.55);color:#e6dbff;font-size:.9rem}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:var(--space-4);top:var(--space-4);z-index:1000;padding:.5rem .75rem;border-radius:var(--r-1);background:var(--accent);color:#0e061d;font-weight:800;transform:translateY(-200%);transition:transform var(--dur) var(--ease)}
+    .skip-link:focus{transform:none}
+
+    /* Header */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:var(--space-3) 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent;transition:border-color var(--dur), background var(--dur)}
+    .nav__link:hover{text-decoration:none;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .nav__link:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    /* Minimal hero for Tools page (no logo/CTAs) */
+    .intro{position:relative;isolation:isolate;text-align:center;padding:clamp(2rem,6vw,5rem) 0 var(--space-8);background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title--brand{margin:.2rem auto .6rem auto;line-height:1.02;font-size:clamp(2rem,5vw,3rem);font-weight:1000;letter-spacing:.5px;text-transform:uppercase}
+    .intro__subtitle{margin:.2rem auto 0 auto;font-size:clamp(1.1rem,3.5vw,1.25rem);font-weight:800;color:var(--muted)}
+
+    /* Category quick-jump chips (centred) */
+    .catnav{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+
+    /* Sections & Tiles */
+    .section{padding:var(--space-12) 0}
+    .section__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;margin-bottom:var(--space-6)}
+    .tiles{grid-template-columns:1fr}
+    @media (min-width:48rem){.tiles{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:76rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+
+    .tile{position:relative;display:flex;flex-direction:column;min-height:220px;border-radius:var(--r-2);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);transition:transform var(--dur) var(--ease), border-color var(--dur), background var(--dur)}
+    .tile:hover{transform:translateY(-3px);text-decoration:none;border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.08)}
+    .tile__media{aspect-ratio:16/9;background:radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%),linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));display:grid;place-items:center;color:#e9deff;font-size:1.75rem}
+    .tile__body{padding:var(--space-6);display:flex;flex-direction:column;gap:.5rem}
+    .tile__title{font-size:1.1rem;margin:0;font-weight:900}
+    .tile__desc{color:var(--muted);margin:0}
+
+    /* Go circle */
+    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
+    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
+    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+
+    /* Reveal-on-scroll */
+    .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
+    .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
+
+    /* Footer */
+    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer__grid{display:grid;gap:var(--space-6)}
+    @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
+    .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
+    .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
+    .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+  
+header.site-header {
+  width: 100%;
+}
+.mast {
+  max-width: none;
+  padding: var(--space-3) 0;
+}
+</style>
+<style>
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+</style>
+<style>
+  .news-grid.tiles a.tile { text-decoration: none; color: inherit; }
+  .news-grid.tiles a.tile .tile__body time {
+    display:block;width:100%;text-align:center;padding:.35rem .9rem;border-radius:999px;
+    border:1.5px solid rgba(139,92,246,.70);
+    box-shadow:0 0 0 1.5px rgba(139,92,246,.18) inset, 0 0 6px rgba(139,92,246,.25);
+    background:rgba(139,92,246,.09);color:#e6dbff;font-weight:900;letter-spacing:.15px;margin:0 0 .6rem 0;
+  }
+  .news-hero .intro__title--brand { margin-bottom:.5rem; }
+  .news-hero .intro__subtitle { margin-top:.25rem; }
+  .news-hero .intro__label { margin-top:2.25rem; font-weight:800; font-size:1.5rem; text-align:center; }
+  .news-hero .chips { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; align-items:center; margin-top:.75rem; }
+  section.section .section__head { text-align:left; justify-content:flex-start; align-items:flex-start; }
+  section.section .section__head h2 { margin-left:0; }
+  
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+
+
+</style>
+
+<style>
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+</style>
+<style>
+
+/* Live Search (News & Updates - matched to Tools layout) */
+.search{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:0}
+.search__input{width:900px;max-width:100%;padding:1rem 1.25rem;border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;
+  font-weight:900;outline:none;transition:border-color .25s,background .25s,box-shadow .25s;
+  margin:0 auto}
+.search__input::placeholder{opacity:.85}
+.search__input:focus{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12);
+  box-shadow:0 0 0 4px rgba(139,92,246,.25)}
+.search__hint{font-size:.9rem;opacity:.8;text-align:center}
+.news-grid .tile[data-search-hide="1"]{display:none !important}
+
+/* Tight gap between chips and search bar (≈2px) */
+.news-hero .chips{margin-bottom: 16px;}
+</style></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="home.html">Home</a></li>
+          <li><a class="nav__link" href="tools.html">Tools</a></li>
+          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+<section class="intro news-hero">
+  <div class="container">
+    <h1 class="intro__title--brand">News &amp; Updates</h1>
+    <p class="intro__subtitle">Announcements and product changes — timestamped, scannable, and clickable.</p>
+    <h2 class="intro__label">Browse by section</h2>
+    <div class="chips">
+      <a class="chip" href="#news">News</a>
+      <a class="chip" href="#updates">Updates</a>
+    </div>
+  </div>
+
+<!-- Live Search (injected) -->
+<div class="search" role="search" aria-label="Filter posts">
+  <label for="newsSearch" class="sr-only">Search posts</label>
+  <input id="newsSearch" class="search__input" type="search" placeholder="Type to filter posts… (e.g. privacy, tools, update)" autocomplete="off" spellcheck="false" inputmode="search" />
+  <div id="searchHint" class="search__hint" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+</div>
+</section>
+
+  
+<section class="section" id="news" aria-labelledby="news-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 id="news-title">News</h2>
+    </div>
+    <div class="grid tiles news-grid">
+      
+<a class="tile" href="#privacy-update" aria-labelledby="card-1">
+  <div class="tile__body">
+    <time datetime="2025-09-26">Updated – 26 Sep 2025</time>
+    <h4 id="card-1" class="tile__title">Privacy policy review</h4>
+    <p class="tile__desc">We clarified data retention and cookie use. No changes to your controls.</p>
+  </div>
+  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+</a>
+
+<a class="tile" href="#terms-update" aria-labelledby="card-2">
+  <div class="tile__body">
+    <time datetime="2025-09-18">Updated – 18 Sep 2025</time>
+    <h4 id="card-2" class="tile__title">Terms of use updated</h4>
+    <p class="tile__desc">Simpler language and a short summary section at the top.</p>
+  </div>
+  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="updates" aria-labelledby="updates-title">
+  <div class="container">
+    <div class="section__head">
+      <h2 id="updates-title">Updates</h2>
+    </div>
+    <div class="grid tiles news-grid">
+      
+<a class="tile" href="#tools-update" aria-labelledby="card-101">
+  <div class="tile__body">
+    <time datetime="2025-10-06">Updated – 06 Oct 2025</time>
+    <h4 id="card-101" class="tile__title">Tools page refreshed</h4>
+    <p class="tile__desc">Improved layout and faster load times on the Tools page. Added clearer descriptions and quick links.</p>
+  </div>
+  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+</a>
+
+<a class="tile" href="#accessibility-update" aria-labelledby="card-102">
+  <div class="tile__body">
+    <time datetime="2025-09-09">Updated – 09 Sep 2025</time>
+    <h4 id="card-102" class="tile__title">Accessibility improvements</h4>
+    <p class="tile__desc">Better keyboard focus states and higher-contrast buttons across the site.</p>
+  </div>
+  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
+<div class="container" style="text-align:center">
+<p class="fine" style="margin:0">
+        © <span id="year">2025</span> riyst.com
+      </p>
+</div>
+</footer>
+<a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
+<script>
+(function(){
+  const ready = (fn) => (document.readyState !== 'loading') ? fn() : document.addEventListener('DOMContentLoaded', fn);
+  ready(() => {
+    const btn = document.getElementById('backToTop');
+    const firstHeading = document.querySelector('section.stack h3[id]');
+
+    if ('IntersectionObserver' in window && firstHeading && btn) {
+      const io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) btn.classList.remove('show');
+        else btn.classList.add('show');
+      }, {rootMargin: "-96px 0px 0px 0px", threshold: 0});
+      io.observe(firstHeading);
+    } else if (btn) {
+      const threshold = (firstHeading?.getBoundingClientRect().top || 600);
+      const onScroll = () => {
+        if (window.scrollY > threshold) btn.classList.add('show'); else btn.classList.remove('show');
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    }
+
+    btn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  function ready(fn){ if(document.readyState!=='loading'){fn();} else {document.addEventListener('DOMContentLoaded', fn);} }
+  ready(function(){
+    var input = document.getElementById('newsSearch');
+    var hint  = document.getElementById('searchHint');
+    var containers = Array.prototype.slice.call(document.querySelectorAll('.news-grid'));
+    if(!input || !hint || containers.length === 0) return;
+
+    var tiles = [];
+    containers.forEach(function(c){ tiles = tiles.concat(Array.prototype.slice.call(c.querySelectorAll('.tile'))); });
+    var total = tiles.length;
+
+    function visibleCount(){
+      var n = 0;
+      tiles.forEach(function(tile){
+        var hidden = tile.getAttribute('data-search-hide') === '1';
+        if(!hidden) n++;
+      });
+      return n;
+    }
+
+    function updateHint(){
+      hint.textContent = 'Showing ' + visibleCount() + ' posts';
+    }
+
+    function filter(){
+      var q = input.value.toLowerCase().trim();
+      tiles.forEach(function(tile){
+        var titleEl = tile.querySelector('.tile__title');
+        var bodyTxt = tile.textContent || '';
+        var txt = (titleEl ? titleEl.textContent : bodyTxt).toLowerCase();
+        // match contains typed sequence (word fragment)
+        var match = q === '' || txt.indexOf(q) !== -1;
+        if(match){ tile.removeAttribute('data-search-hide'); }
+        else { tile.setAttribute('data-search-hide','1'); }
+      });
+      updateHint();
+    }
+
+    input.addEventListener('input', filter, {passive:true});
+    updateHint();
+  });
+})();
+</script>
+</body>
+</html>

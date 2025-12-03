@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+  <style>
+    :root{
+      --bg:#0b0b0e; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --panel:#121219; --max-w:1100px; --ctl-h:46px; --gap:14px; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial}
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .intro{position:relative;text-align:center;padding:clamp(1.5rem,5vw,2.5rem) 0 0.75rem;background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title{margin:.1rem auto .4rem auto;line-height:1.02;font-size:clamp(1.8rem,4vw,2.2rem);font-weight:1000;letter-spacing:.4px}
+    .intro__subtitle{margin:0 auto;color:var(--muted);font-weight:800}
+
+    .tool{padding:1.6rem 0 3rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+          border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45);
+          padding:1.2rem;max-width:980px;margin:0 auto}
+    .row{display:flex;justify-content:center;gap:var(--gap);flex-wrap:wrap;margin-top:var(--gap)}
+    .full{min-width:260px;max-width:100%;flex:1 1 720px}
+
+    label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.35rem}
+    textarea{
+      min-height:260px;height:auto;width:100%;padding:.85rem 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.07);color:#e7e6ff;resize:vertical;outline:none;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace
+    }
+    .preview{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a0f1a}
+    .preview textarea{border:0;background:transparent}
+
+    .mode{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:-.25rem 0 1rem}
+    .seg{display:flex;gap:8px;padding:6px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:999px}
+    .seg button{border:1px solid transparent;border-radius:999px;background:transparent;color:#e7e6ff;padding:.45rem .95rem;font-weight:900;cursor:pointer}
+    .seg button[aria-selected="true"]{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d}
+    .seg button:not([aria-selected="true"]):hover{background:rgba(255,255,255,.1)}
+
+    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:.6rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+         background:rgba(255,255,255,.07);color:#e7e6ff;font-weight:900;box-shadow:none;cursor:pointer;
+         transition:transform .12s ease, opacity .2s ease, filter .2s ease}
+    .btn.small{padding:.45rem .85rem}
+    .btn[disabled]{opacity:.45;cursor:not-allowed;filter:grayscale(.45) brightness(.9)}
+    .btn-primary{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;border-color:transparent}
+
+    .drop-merge{display:none;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;
+      border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.05);padding:10px 12px;border-radius:12px;
+      color:#e7e6ff;font-weight:800;cursor:pointer;text-align:center; user-select:none}
+    .drop-merge input{display:none}
+
+    .input-wrap{position:relative}
+    .input-wrap input[type="password"],
+    .input-wrap input[type="text"]{
+      height:var(--ctl-h);width:100%;padding:0 86px 0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.07);color:#e7e6ff;outline:none;appearance:none
+    }
+    .eye-btn, .gen-btn{position:absolute;top:50%;transform:translateY(-50%);border:0;background:transparent;cursor:pointer;padding:6px;
+             display:flex;align-items:center;justify-content:center;border-radius:8px}
+    .eye-btn{right:10px}
+    .gen-btn{left:10px} /* on the left side */
+    .eye-btn:hover, .gen-btn:hover{background:rgba(255,255,255,.1)}
+    .icon{width:22px;height:22px;display:block}
+    .with-gen input[type="password"],
+    .with-gen input[type="text"]{
+      padding-left:44px;
+    }
+
+
+    .hidden{display:none!important}
+    .msg{color:#cbd5e1;font-size:.9rem;text-align:center;margin-top:.4rem}
+    .msg.err{color:#fecaca}
+    .msg.ok{color:#bbf7d0}
+  </style>
+
+<!-- Template header/footer styles injected -->
+<style>
+    :root{
+      --bg:#0b0b0e; --panel:#121219; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --space-0:0; --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem;
+      --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --r-1:.375rem; --r-2:.75rem; --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      --dur-fast:.15s; --dur:.25s; --dur-slow:.5s; --ease:cubic-bezier(.2,.7,.2,1);
+      --font:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Utilities */
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .stack{display:flex;flex-direction:column}
+    .stack>*+*{margin-top:var(--space-4)}
+    .grid{display:grid;gap:var(--space-4)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .btn{--btn-bg:transparent;--btn-text:var(--text);--btn-border:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-text);font-weight:700;transition:transform var(--dur) var(--ease), background var(--dur), border-color var(--dur);outline-offset:3px}
+    .btn:hover{transform:translateY(-1px);text-decoration:none}
+    .btn--primary{--btn-bg:var(--accent);--btn-text:#0e061d;--btn-border:transparent}
+    .btn--ghost{--btn-bg:rgba(255,255,255,.06)}
+    .btn:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:999px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.55);color:#e6dbff;font-size:.9rem}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:var(--space-4);top:var(--space-4);z-index:1000;padding:.5rem .75rem;border-radius:var(--r-1);background:var(--accent);color:#0e061d;font-weight:800;transform:translateY(-200%);transition:transform var(--dur) var(--ease)}
+    .skip-link:focus{transform:none}
+
+    /* Header */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:var(--space-3) 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent;transition:border-color var(--dur), background var(--dur)}
+    .nav__link:hover{text-decoration:none;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .nav__link:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    /* Minimal hero */
+    .intro{position:relative;isolation:isolate;text-align:center;padding:clamp(2rem,6vw,5rem) 0 var(--space-8);background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title--brand{margin:.2rem auto .6rem auto;line-height:1.02;font-size:clamp(2rem,5vw,3rem);font-weight:1000;letter-spacing:.5px;text-transform:uppercase}
+    .intro__subtitle{margin:.2rem auto 0 auto;font-size:clamp(1.1rem,3.5vw,1.25rem);font-weight:800;color:var(--muted)}
+
+    /* Category quick-jump chips */
+    .catnav{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+
+    /* Sections & Tiles */
+    .section{padding:var(--space-12) 0}
+    .section__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;margin-bottom:var(--space-6)}
+    .tiles{grid-template-columns:1fr}
+    @media (min-width:48rem){.tiles{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:76rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+
+    .tile{position:relative;display:flex;flex-direction:column;min-height:220px;border-radius:var(--r-2);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);transition:transform var(--dur) var(--ease), border-color var(--dur), background var(--dur)}
+    .tile:hover{transform:translateY(-3px);text-decoration:none;border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.08)}
+    .tile__media{aspect-ratio:16/9;background:radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%),linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));display:grid;place-items:center;color:#e9deff;font-size:1.75rem}
+    .tile__body{padding:var(--space-6);display:flex;flex-direction:column;gap:.5rem}
+    .tile__title{font-size:1.1rem;margin:0;font-weight:900}
+    .tile__desc{color:var(--muted);margin:0}
+
+    /* Go circle */
+    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
+    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
+    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+
+    /* Reveal-on-scroll */
+    .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
+    .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
+
+    /* Footer */
+    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer__grid{display:grid;gap:var(--space-6)}
+    @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
+    .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
+    .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
+    .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+  </style>
+<style>
+/* Filters: default 'off' state shows subdued grey look for buttons */
+button.chip{opacity:.7; filter: grayscale(1);}
+button.chip[aria-pressed="true"]{opacity:1; filter:none; background:rgba(139,92,246,.2); border-color:rgba(139,92,246,.9)}
+</style>
+<style>
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+</style>
+<style>
+/* --- Subcategory Dropdown + Scroll Alignment --- */
+.nav-item.has-sub { position: relative; display: inline-block; }
+.nav-item.has-sub > a { display: inline-block; }
+.sub-dropdown { 
+  display: none; position: absolute; left: 0; top: 100%;
+  background: rgba(20,20,30,0.95); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 8px; min-width: 240px; z-index: 50;
+  backdrop-filter: blur(6px);
+}
+.sub-dropdown a { 
+  display: block; padding: 10px 12px; border-radius: 8px; 
+  text-decoration: none; color: #eaeaea; white-space: nowrap;
+}
+.sub-dropdown a:hover { background: rgba(255,255,255,0.08); }
+.nav-item.has-sub:hover > .sub-dropdown { display: block; }
+
+/* Keep headings from hiding under sticky headers on jump */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; grid-column: 1 / -1; display: block; }
+</style>
+<style>
+/* --- Chip Dropdown on Category Bar --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 8px; }
+.catnav .chip--with-sub { position: relative; }
+.catnav .chip--with-sub > a.chip { position: relative; z-index: 2; }
+.catnav .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 6px); left: 0;
+  background: rgba(20,20,30,0.98); padding: 8px; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  white-space: nowrap; z-index: 40;
+}
+.catnav .chip-dropdown .chip--sub { display: block; margin: 6px; }
+.catnav .chip--with-sub:hover .chip-dropdown { display: block; }
+</style>
+<style>
+/* --- Category bar dropdowns --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 12px; }
+.catnav .chip--with-sub { position: relative; }
+.catnav .chip--with-sub > .chip { z-index: 2; }
+.catnav .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0;
+  background: rgba(20,20,30,0.98); padding: 10px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  min-width: 240px;
+}
+.catnav .chip-dropdown .chip { display: block; margin: 6px 4px; }
+.catnav .chip--with-sub:hover .chip-dropdown { display: block; }
+</style>
+<style>
+/* --- Polished dropdown behavior --- */
+.catnav { position: relative; display: flex; flex-wrap: wrap; gap: 12px; }
+.catnav .chipwrap.chip--with-sub { position: relative; display: inline-block; }
+.catnav .chipwrap.chip--with-sub > .chip { position: relative; z-index: 2; display: inline-block; }
+.catnav .chipwrap .chip-dropdown {
+  display: none; position: absolute; top: calc(100% + 8px); left: 0;
+  width: 100%; min-width: 0;
+  background: rgba(20,20,30,0.98); padding: 10px; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.catnav .chipwrap .chip-dropdown .chip { 
+  display: block; width: 100%; margin: 6px 0; text-align: center; 
+}
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style>
+<style>
+/* --- Solid, stacked subcategory dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  min-width: 0;
+  background: #111; /* solid background to prevent bleed-through */
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  padding: 6px 0; /* minimal vertical padding */
+  z-index: 50;
+}
+
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;                    /* remove gaps between chips */
+  border-radius: 0;             /* square interior corners for flush stack */
+  text-align: center;
+}
+
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* ensure dropdown shows on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style>
+<style>
+/* --- Glass-effect subcategory dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* attach directly under parent chip */
+  left: 0;
+  width: 100%;
+  background: rgba(120, 60, 200, 0.15); /* transparent purple glass */
+  backdrop-filter: blur(12px);          /* frosted glass effect */
+  border-radius: 12px;
+  border: 1px solid rgba(180, 120, 255, 0.4); /* purple outline */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  z-index: 50;
+}
+
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  text-align: center;
+}
+
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown {
+  display: block;
+}
+</style>
+<style>
+/* --- Seamless chip-extension dropdown --- */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% - 8px); /* overlap the parent chip border for a seamless join */
+  left: 0;
+  width: 100%;
+  background: transparent;   /* no panel box */
+  border: none;
+  box-shadow: none;
+  padding: 0;                /* no side padding */
+  z-index: 60;
+}
+
+/* stack subchips flush with no gaps; rely on each chip's own style */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;          /* interior edges straight so they stack */
+  text-align: center;
+  overflow: hidden;          /* keep text inside */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* round the very bottom of the stack */
+.catnav .chipwrap .chip-dropdown .chip:first-child {
+  border-top-left-radius: 0;  /* attaches to parent chip nicely */
+  border-top-right-radius: 0;
+}
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* show dropdown on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+</style>
+<style>
+/* --- Expanding chip with integrated subcategories --- */
+.catnav { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Wrapper turns into a vertical stack */
+.catnav .chipwrap.chip--with-sub {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Base chip */
+.catnav .chipwrap.chip--with-sub > .chip {
+  transition: border-radius 120ms ease;
+  z-index: 2;
+}
+
+/* On hover, flatten bottom corners so it connects visually with items below */
+.catnav .chipwrap.chip--with-sub:hover > .chip {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Dropdown becomes part of the normal flow (no absolute positioning), stacked under the chip */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: static;   /* stack naturally below */
+  width: 100%;
+  padding: 0;         /* no panel look */
+  margin-top: 6px;    /* tiny gap between main chip and first option */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Show on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+
+/* Subcategory "chips" styled to look fused with the top chip */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;         /* straight interior edges */
+  text-align: center;
+  white-space: normal;      /* allow wrapping so words aren't clipped */
+  overflow: visible;        /* ensure full text visible */
+  line-height: 1.2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Round only the very bottom corners of the last item */
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+</style>
+<style>
+/* --- Overlayed expanding chip (no layout shift) --- */
+.catnav .chipwrap.chip--with-sub {
+  position: relative;        /* anchor for absolute dropdown */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Flatten parent chip corners on hover so it fuses visually */
+.catnav .chipwrap.chip--with-sub:hover > .chip {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Overlay dropdown: absolute, full width of chip, sits on top of content */
+.catnav .chipwrap .chip-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 60;               /* above section headings */
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Show on hover */
+.catnav .chipwrap.chip--with-sub:hover .chip-dropdown { display: block; }
+
+/* Sub-items: stacked, wrapped text, seamless pill stack */
+.catnav .chipwrap .chip-dropdown .chip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  text-align: center;
+  white-space: normal;   /* allow wrapping */
+  overflow: visible;
+  line-height: 1.2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* round only the bottom of the last item */
+.catnav .chipwrap .chip-dropdown .chip:last-child {
+  border-bottom-left-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
+
+/* Prevent hover gap flicker between chip and dropdown */
+.catnav .chipwrap.chip--with-sub::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 6px;              /* small hover bridge */
+}
+</style>
+<style>
+/* Reserve space only under the "Browse by category" chip bar, not under Filters */
+nav.catnav[aria-label="Categories"] { margin-bottom: 150px; }
+@media (max-width: 900px) {
+  nav.catnav[aria-label="Categories"] { margin-bottom: 180px; }
+}
+
+/* Keep jump alignment */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; }
+
+/* Slight width bump for 'Other' */
+nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-other"] {
+  min-width: 170px; text-align: center;
+}
+</style>
+<style>
+/* Tighter gap below the Categories chip bar */
+nav.catnav[aria-label="Categories"] { margin-bottom: 108px; }  /* was 150px */
+@media (max-width: 900px) {
+  nav.catnav[aria-label="Categories"] { margin-bottom: 128px; } /* was 180px */
+}
+
+/* Keep jump alignment */
+.stack > h3 { scroll-margin-top: 96px; }
+.subcategory-title { scroll-margin-top: 96px; }
+
+/* 'Other' width comfort */
+nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-other"] {
+  min-width: 170px; text-align: center;
+}
+</style>
+<style>
+/* --- Mobile: tap to open/close category dropdowns --- */
+@media (hover: none) and (pointer: coarse) {
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub .chip-dropdown { display: none; }
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub.open .chip-dropdown { display: block; }
+  /* Ensure the parent chip stays on top of the dropdown */
+  nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub.open > .chip {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    z-index: 71;
+  }
+}
+</style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a><a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="home.html">Home</a></li>
+          <li><a class="nav__link" href="tools.html">Tools</a></li>
+          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<main id="main">
+    <section class="intro">
+      <div class="container">
+        <h1 class="intro__title">Text Encoder / Decoder</h1>
+        <p class="intro__subtitle">AES-GCM (256-bit) — client-side only</p>
+      </div>
+    </section>
+
+    <section class="tool">
+      <div class="container">
+        <div class="card" role="region" aria-label="AES-GCM encrypt/decrypt tool">
+
+          <!-- Mode selector at the top -->
+          <div class="mode" role="tablist" aria-label="Mode">
+            <div class="seg">
+              <button id="modeEncrypt" role="tab" aria-selected="true">Encrypt</button>
+              <button id="modeDecrypt" role="tab" aria-selected="false">Decrypt</button>
+            </div>
+          </div>
+
+          <!-- Upload (Decrypt mode ONLY) -->
+          <div class="row" id="rowUpload" style="display:none">
+            <div class="full">
+              <div class="drop-merge" id="dropMerge" role="button" tabindex="0" aria-label="Choose encrypted JSON file">
+                <input id="fileInput" type="file" accept=".json,.enc,.cipher" />
+                Click to choose a JSON file or drop it here
+              </div>
+              <div class="msg" id="fileMeta" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Single textarea (Encrypt: always visible; Decrypt: appears only after successful password) -->
+          <div class="row" id="rowText">
+            <div class="full">
+              <label for="ioText">Text</label>
+              <div class="preview"><textarea id="ioText" placeholder="Type text to encrypt…" aria-label="Text input and output"></textarea></div>
+              <div class="actions" id="actionsEncrypt">
+                <button class="btn small" id="btnClear" type="button">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password row (Encrypt: always; Decrypt: after file upload) -->
+          <div class="row" id="rowPassword">
+            <div class="full">
+              <label for="password">Password / Passphrase</label>
+              <div class="input-wrap">
+                <input id="password" type="password" placeholder="Enter a strong password…" autocomplete="new-password" />
+                <!-- Generate icon (refresh arrows) — Encrypt mode only, right side -->
+                <button class="gen-btn" id="btnGen" type="button" title="Generate and copy a strong password" aria-label="Generate password">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0114.13-3.36L23 10"></path>
+                    <path d="M20.49 15a9 9 0 01-14.13 3.36L1 14"></path>
+                  </svg>
+                </button>
+                <!-- Eye icon -->
+                <button class="eye-btn" id="togglePwd" type="button" title="Show/Hide password" aria-label="Show password">
+                  <svg class="icon" id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+              <div class="msg" id="hint"></div>
+            </div>
+          </div>
+
+          <!-- Primary action (Encrypt only). Decrypt has no button -->
+          <div class="row" id="rowRun">
+            <div class="full">
+              <div class="actions">
+                <button class="btn btn-primary" id="btnEncrypt" type="button">Encrypt</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
+<div class="container" style="text-align:center">
+<p class="fine" style="margin:0">
+        © <span id="year">2025</span> riyst.com
+      </p>
+</div>
+</footer>
+
+  <script>
+    // ---- Shorthands ----
+    const $ = sel => document.querySelector(sel);
+    const enc = new TextEncoder();
+    const dec = new TextDecoder();
+
+    // ---- Elements ----
+    const modeEncrypt = $('#modeEncrypt');
+    const modeDecrypt = $('#modeDecrypt');
+    const rowUpload = $('#rowUpload');
+    const dropMerge = $('#dropMerge');
+    const fileInput = $('#fileInput');
+    const fileMeta = $('#fileMeta');
+    const rowText = $('#rowText');
+    const ioText = $('#ioText');
+    const actionsEncrypt = $('#actionsEncrypt');
+    const btnClear = $('#btnClear');
+    const rowPassword = $('#rowPassword');
+    const pwd = $('#password');
+    const togglePwd = $('#togglePwd');
+    const eyeIcon = $('#eyeIcon');
+    const btnGen = $('#btnGen');
+    const rowRun = $('#rowRun');
+    const btnEncrypt = $('#btnEncrypt');
+    const hint = $('#hint');
+
+    // ---- Config ----
+    const DEFAULT_ITERS = 350000; // fixed
+    let decryptEnvelope = null; // holds uploaded JSON for decrypt
+
+    // ---- Base64 helpers ----
+    function toB64(bytes){
+      let bin = ''; const arr = new Uint8Array(bytes);
+      for(let i=0;i<arr.length;i++) bin += String.fromCharCode(arr[i]);
+      return btoa(bin);
+    }
+    function fromB64(b64){
+      const bin = atob(b64);
+      const arr = new Uint8Array(bin.length);
+      for(let i=0;i<bin.length;i++) arr[i] = bin.charCodeAt(i);
+      return arr.buffer;
+    }
+    function randBytes(len){ const b = new Uint8Array(len); crypto.getRandomValues(b); return b; }
+
+    // ---- Crypto (Web Crypto) ----
+    async function deriveKey(password, salt, iterations){
+      const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), {name:'PBKDF2'}, false, ['deriveKey']);
+      return crypto.subtle.deriveKey(
+        {name:'PBKDF2', hash:'SHA-256', salt, iterations},
+        keyMaterial,
+        {name:'AES-GCM', length:256},
+        false,
+        ['encrypt','decrypt']
+      );
+    }
+    async function encryptText(plaintext, password){
+      if(!password) throw new Error('Password required');
+      const salt = randBytes(16); // 128-bit
+      const iv = randBytes(12);   // 96-bit
+      const key = await deriveKey(password, salt, DEFAULT_ITERS);
+      const alg = {name:'AES-GCM', iv};
+      const ct = await crypto.subtle.encrypt(alg, key, enc.encode(plaintext || ''));
+      const envelope = {
+        v: 1,
+        scheme: 'AES-GCM',
+        kdf: { name:'PBKDF2', hash:'SHA-256', iterations: DEFAULT_ITERS },
+        salt: toB64(salt),
+        iv: toB64(iv),
+        ct: toB64(ct)
+      };
+      return JSON.stringify(envelope, null, 2);
+    }
+    async function decryptText(envelopeJSON, password){
+      if(!password) throw new Error('Password required');
+      const env = JSON.parse(envelopeJSON);
+      if(env.v !== 1) throw new Error('Unsupported version');
+      if(!env.kdf || env.kdf.name !== 'PBKDF2' || env.kdf.hash !== 'SHA-256') throw new Error('Unsupported KDF');
+      const salt = new Uint8Array(fromB64(env.salt));
+      const iv = new Uint8Array(fromB64(env.iv));
+      const key = await deriveKey(password, salt, Number(env.kdf.iterations));
+      const alg = {name:'AES-GCM', iv};
+      const ptBuf = await crypto.subtle.decrypt(alg, key, fromB64(env.ct));
+      return dec.decode(ptBuf);
+    }
+
+    // ---- Password show/hide ----
+    togglePwd.addEventListener('click', ()=>{
+      const show = pwd.type === 'password';
+      pwd.type = show ? 'text' : 'password';
+      togglePwd.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      // toggle eye icon
+      eyeIcon.innerHTML = show
+        ? '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-6.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.8 21.8 0 0 1-3.23 4.31M1 1l22 22" />'
+        : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>';
+    });
+
+    // ---- Password generator + copy (Encrypt mode only) ----
+    btnGen.addEventListener('click', async ()=>{
+      const strong = generatePassword(20);
+      pwd.value = strong;
+      try {
+        await navigator.clipboard.writeText(strong);
+        flashHint('Strong password generated & copied', true);
+      } catch {
+        flashHint('Strong password generated (copy failed)', false);
+      }
+      pwd.focus(); pwd.select(); // allow manual copy if needed
+    });
+    function generatePassword(length=20){
+      const upper='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lower='abcdefghijklmnopqrstuvwxyz';
+      const nums='0123456789';
+      const syms='!@#$%^&*()-_=+[]{};:,.<>?';
+      const all = upper+lower+nums+syms;
+      const req = [upper, lower, nums, syms];
+      let res = [];
+      req.forEach(set => res.push(set[rand(set.length)]));
+      for(let i=res.length;i<length;i++){ res.push(all[rand(all.length)]); }
+      for(let i=res.length-1;i>0;i--){ const j = rand(i+1); [res[i],res[j]]=[res[j],res[i]]; }
+      return res.join('');
+    }
+    function rand(n){ return crypto.getRandomValues(new Uint32Array(1))[0] % n; }
+    function flashHint(msg, ok){
+      hint.textContent = msg; hint.className = 'msg ' + (ok?'ok':'err');
+      setTimeout(()=>{ hint.textContent=''; hint.className='msg'; }, 1800);
+    }
+
+    // ---- Encrypt flow ----
+    btnClear.addEventListener('click', ()=>{ ioText.value=''; });
+    btnEncrypt.addEventListener('click', async ()=>{
+      try{
+        const out = await encryptText(ioText.value || '', pwd.value || '');
+        ioText.value = out;
+        const blob = new Blob([out], {type:'application/json'});
+        const ts = new Date().toISOString().replace(/[:.]/g,'-');
+        downloadBlob(blob, `encrypted-${ts}.json`);
+      }catch(e){
+        alert(e.message || 'Encryption failed');
+      }
+    });
+    function downloadBlob(blob, filename){
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) { window.navigator.msSaveOrOpenBlob(blob, filename); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename; a.style.display='none';
+      document.body.appendChild(a);
+      requestAnimationFrame(()=>{ try{ a.click(); }catch(_){}
+        setTimeout(()=>{ a.remove(); URL.revokeObjectURL(url); }, 1500);
+      });
+    }
+
+    // ---- Mode management & Decrypt flow ----
+    function clearPassword(){
+      pwd.value = '';
+      pwd.type = 'password';
+      togglePwd.setAttribute('aria-label','Show password');
+      eyeIcon.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>';
+    }
+
+    
+    function setMode(mode){
+      const isEncrypt = mode === 'encrypt';
+      modeEncrypt.setAttribute('aria-selected', String(isEncrypt));
+      modeDecrypt.setAttribute('aria-selected', String(!isEncrypt));
+      rowUpload.style.display = isEncrypt ? 'none' : '';
+      if (dropMerge) dropMerge.style.display = isEncrypt ? 'none' : 'flex';
+      rowPassword.style.display = isEncrypt ? '' : (decryptEnvelope ? '' : 'none');
+      pwd.placeholder = isEncrypt ? 'Enter a strong password…' : 'Enter the password';
+      if (btnGen) btnGen.style.display = isEncrypt ? '' : 'none';
+      rowPassword.classList.toggle('with-gen', isEncrypt);
+      rowText.style.display = isEncrypt ? '' : (ioText.dataset.unlocked === 'true' ? '' : 'none');
+      actionsEncrypt.style.display = isEncrypt ? '' : 'none';
+      rowRun.style.display = isEncrypt ? '' : 'none';
+      ioText.readOnly = !isEncrypt;
+      ioText.placeholder = isEncrypt ? 'Type text to encrypt…' : '';
+      ioText.value = ''; // always clear text area on mode switch
+      ioText.dataset.unlocked = isEncrypt ? 'false' : 'false';
+      hint.textContent = '';
+      clearPassword();
+    }
+
+    modeEncrypt.addEventListener('click', ()=> setMode('encrypt'));
+    modeDecrypt.addEventListener('click', ()=> setMode('decrypt'));
+    setMode('encrypt'); // default
+
+    // Upload handlers (Decrypt mode)
+    if(dropMerge){
+      dropMerge.addEventListener('click', ()=>{ if(fileInput) fileInput.click(); });
+      dropMerge.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); if(fileInput) fileInput.click(); }});
+      dropMerge.addEventListener('dragover', (e)=>{ e.preventDefault(); dropMerge.style.background='rgba(255,255,255,.08)'; });
+      dropMerge.addEventListener('dragleave', ()=>{ dropMerge.style.background='rgba(255,255,255,.05)'; });
+      dropMerge.addEventListener('drop', async (e)=>{
+        e.preventDefault(); dropMerge.style.background='rgba(255,255,255,.05)';
+        const f = e.dataTransfer.files && e.dataTransfer.files[0]; if(f) await handleFile(f);
+      });
+    }
+    if(fileInput){
+      fileInput.addEventListener('change', async (e)=>{
+        if(e.target.files && e.target.files[0]){ await handleFile(e.target.files[0]); e.target.value=''; }
+      });
+    }
+    async function handleFile(file){
+      const name = (file.name||'').toLowerCase();
+      if(!name.match(/\.(json|enc|cipher)$/)){ alert('Please choose an encrypted JSON (.json/.enc/.cipher)'); return; }
+      try{
+        decryptEnvelope = await file.text();
+        fileMeta.textContent = 'Loaded: ' + (file.name || 'file');
+        rowPassword.style.display = '';
+        pwd.placeholder = 'Enter the password';
+        clearPassword(); // ensure no remembered password
+        pwd.focus();
+      }catch(_){ alert('Unable to read file'); }
+    }
+
+    // Only decrypt on Enter key
+    pwd.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' && decryptEnvelope){
+        e.preventDefault();
+        triggerDecrypt();
+      }
+    });
+    async function triggerDecrypt(){
+      try{
+        const out = await decryptText(decryptEnvelope, pwd.value || '');
+        ioText.value = out;
+        ioText.readOnly = true;
+        ioText.dataset.unlocked = 'true';
+        rowText.style.display = '';     // reveal preview
+        rowPassword.style.display = 'none'; // hide password box after success
+        clearPassword(); // wipe password after use
+        flashHint('Decrypted', true);
+      }catch(e){
+        hint.textContent = 'Wrong password or corrupted file';
+        hint.className = 'msg err';
+      }
+    }
+  </script>
+
+</body>
+</html>

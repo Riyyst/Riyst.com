@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tools</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+<style>
+    :root{
+      --bg:#0b0b0e; --panel:#121219; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --space-0:0; --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem;
+      --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --r-1:.375rem; --r-2:.75rem; --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+      --dur-fast:.15s; --dur:.25s; --dur-slow:.5s; --ease:cubic-bezier(.2,.7,.2,1);
+      --font:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+    body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Utilities */
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+    .stack{display:flex;flex-direction:column}
+    .stack>*+*{margin-top:var(--space-4)}
+    .grid{display:grid;gap:var(--space-4)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .btn{--btn-bg:transparent;--btn-text:var(--text);--btn-border:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-text);font-weight:700;transition:transform var(--dur) var(--ease), background var(--dur), border-color var(--dur);outline-offset:3px}
+    .btn:hover{transform:translateY(-1px);text-decoration:none}
+    .btn--primary{--btn-bg:var(--accent);--btn-text:#0e061d;--btn-border:transparent}
+    .btn--ghost{--btn-bg:rgba(255,255,255,.06)}
+    .btn:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:999px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.55);color:#e6dbff;font-size:.9rem}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:var(--space-4);top:var(--space-4);z-index:1000;padding:.5rem .75rem;border-radius:var(--r-1);background:var(--accent);color:#0e061d;font-weight:800;transform:translateY(-200%);transition:transform var(--dur) var(--ease)}
+    .skip-link:focus{transform:none}
+
+    /* Header */
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:var(--space-3) 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent;transition:border-color var(--dur), background var(--dur)}
+    .nav__link:hover{text-decoration:none;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6)}
+    .nav__link:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    /* Minimal hero for Tools page (no logo/CTAs) */
+    .intro{position:relative;isolation:isolate;text-align:center;padding:clamp(2rem,6vw,5rem) 0 var(--space-8);background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title--brand{margin:.2rem auto .6rem auto;line-height:1.02;font-size:clamp(2rem,5vw,3rem);font-weight:1000;letter-spacing:.5px;text-transform:uppercase}
+    .intro__subtitle{margin:.2rem auto 0 auto;font-size:clamp(1.1rem,3.5vw,1.25rem);font-weight:800;color:var(--muted)}
+
+    /* Category quick-jump chips (centred) */
+    .catnav{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem}
+
+    /* Sections & Tiles */
+    .section{padding:var(--space-12) 0}
+    .section__head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;margin-bottom:var(--space-6)}
+    .tiles{grid-template-columns:1fr}
+    @media (min-width:48rem){.tiles{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:76rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+
+    .tile{position:relative;display:flex;flex-direction:column;min-height:220px;border-radius:var(--r-2);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);transition:transform var(--dur) var(--ease), border-color var(--dur), background var(--dur)}
+    .tile:hover{transform:translateY(-3px);text-decoration:none;border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.08)}
+    .tile__media{aspect-ratio:16/9;background:radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%),linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));display:grid;place-items:center;color:#e9deff;font-size:1.75rem}
+    .tile__body{padding:var(--space-6);display:flex;flex-direction:column;gap:.5rem}
+    .tile__title{font-size:1.1rem;margin:0;font-weight:900}
+    .tile__desc{color:var(--muted);margin:0}
+
+    /* Go circle */
+    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
+    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
+    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+
+    /* Reveal-on-scroll */
+    .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
+    .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
+
+    /* Footer */
+    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footer__grid{display:grid;gap:var(--space-6)}
+    @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
+    .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
+    .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
+    .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+  
+header.site-header {
+  width: 100%;
+}
+.mast {
+  max-width: none;
+  padding: var(--space-3) 0;
+}
+</style>
+<style>
+/* Injected: anchor offset & Back-to-Top */
+.section h3[id]{scroll-margin-top:96px}
+
+/* Back-to-Top button */
+.back-to-top{
+  position:fixed; right:1rem; bottom:1rem; z-index:1000;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+  background:rgba(139,92,246,.95); color:#0e061d; font-weight:900;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.back-to-top.show{opacity:1; pointer-events:auto; transform:none}
+.back-to-top:focus-visible{outline:3px solid #fff; box-shadow:0 0 0 4px rgba(139,92,246,.6)}
+.back-to-top .arrow{display:inline-block; width:1.25rem; height:1.25rem; line-height:1}
+.back-to-top svg{display:block}
+</style><style>
+
+.search{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:0}
+.search__input{width:900px;max-width:100%;padding:1rem 1.25rem;border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;
+  font-weight:900;outline:none;transition:border-color .25s,background .25s,box-shadow .25s;
+  margin:0 auto}
+.search__input::placeholder{opacity:.85}
+.search__input:focus{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12);
+  box-shadow:0 0 0 4px rgba(139,92,246,.25)}
+.search__hint{font-size:.9rem;opacity:.8;text-align:center}
+.tile[data-search-hide="1"]{display:none !important}
+
+@media (hover:none) and (pointer:coarse){
+  nav.catnav[aria-label="Categories"].open{margin-bottom:220px;}
+}
+</style><style id="tile-wrap-display-contents">.tile-wrap{display:contents}</style></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a><a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
+
+<!-- Navigation Bar -->
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="home.html">Home</a></li>
+          <li><a class="nav__link nav__link--highlight" href="tools.html">Tools</a></li>
+          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<!-- Minimal hero -->
+<section class="intro">
+<div class="container">
+<h1 class="intro__title--brand">Tools</h1>
+<p class="intro__subtitle">Find the right tool in seconds<br/> Simple, privacy-first utilities and resources</p>
+</div>
+</section>
+
+<!-- Tools -->
+<section aria-labelledby="tools-title" class="section" id="tools">
+<div class="container">
+<div class="section__head">
+<h2 id="tools-title">Search tools by category</h2>
+<nav aria-label="Tool categories" class="catnav">
+<a class="chip" href="#cat-featured">Featured</a>
+<a class="chip" href="#cat-text">Text</a>
+<a class="chip" href="#cat-sec-priv">Security &amp; Privacy</a>
+<a class="chip" href="#cat-media">Media &amp; Converters</a>
+<a class="chip" href="#cat-utilities">Utilities</a>
+</nav>
+
+<!-- Live Search (injected) -->
+<div aria-label="Filter tools" class="search" role="search">
+<label class="sr-only" for="toolSearch">Search tools</label>
+<input autocomplete="off" class="search__input" id="toolSearch" inputmode="search" placeholder="Type to filter tools… (e.g. p, pd, image)" spellcheck="false" type="search"/>
+<div aria-atomic="true" aria-live="polite" class="search__hint" id="searchHint"></div>
+</div>
+</div>
+
+<!-- Featured -->
+<section aria-labelledby="cat-featured" class="stack">
+<h3 id="cat-featured">Featured</h3>
+
+<div class="grid tiles reveal">
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/powerful-sites.html" title="Powerful websites you should know">
+<div aria-hidden="true" class="tile__media">🧰</div>
+<div class="tile__body">
+<h4 class="tile__title">Powerful websites you should know</h4>
+<p class="tile__desc">A curated list of the web’s hidden power tools.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Powerful websites you should know</span>
+</a></div>
+
+</div>
+</section>
+
+<!-- Text -->
+<section aria-labelledby="cat-text" class="stack" style="margin-top:var(--space-12)">
+<h3 id="cat-text">Text</h3>
+
+<div class="grid tiles reveal">
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/ascii-art.html" title="ASCII art generator">
+<div aria-hidden="true" class="tile__media">🎨</div>
+<div class="tile__body">
+<h4 class="tile__title">ASCII art generator</h4>
+<p class="tile__desc">Turn images and text into ASCII masterpieces.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open ASCII art generator</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/find-and-replace.html" title="Find &amp; replace">
+<div aria-hidden="true" class="tile__media">🧭</div>
+<div class="tile__body">
+<h4 class="tile__title">Find &amp; replace</h4>
+<p class="tile__desc">Find and replace text without the hassle.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Find and replace</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/text-case-converter.html" title="Text case converter">
+<div aria-hidden="true" class="tile__media">🔤</div>
+<div class="tile__body">
+<h4 class="tile__title">Text case converter</h4>
+<p class="tile__desc">Upper, lower, title, sentence — instantly.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Text case converter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/word-character-counter.html" title="Word and character counter">
+<div aria-hidden="true" class="tile__media">🔢</div>
+<div class="tile__body">
+<h4 class="tile__title">Word and character counter</h4>
+<p class="tile__desc">Paste text; get counts, stats, and readability.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Word and character counter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/text-difference-checker.html" title="Text difference checker">
+<div aria-hidden="true" class="tile__media">🔀</div>
+<div class="tile__body"><h4 class="tile__title">Text difference checker</h4><p class="tile__desc">Compare two texts and highlight changes clearly.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Text difference checker</span>
+</a></div>
+
+</div>
+</section>
+
+<!-- Security & Privacy -->
+<section aria-labelledby="cat-sec-priv" class="stack" style="margin-top:var(--space-12)">
+<h3 id="cat-sec-priv">Security &amp; Privacy</h3>
+
+<div class="grid tiles reveal">
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/metadata-remover.html" title="Metadata remover">
+<div aria-hidden="true" class="tile__media">🧼</div>
+<div class="tile__body">
+<h4 class="tile__title">Metadata remover</h4>
+<p class="tile__desc">Strip EXIF and other tags to protect privacy.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Metadata remover</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/temp-email.html" title="Temp email">
+<div aria-hidden="true" class="tile__media">📮</div>
+<div class="tile__body">
+<h4 class="tile__title">Temp email</h4>
+<p class="tile__desc">Disposable inboxes for safe sign-ups.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Temp email</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/encrypt-decrypt.html" title="Text encrypter / decrypter">
+<div aria-hidden="true" class="tile__media">🔐</div>
+<div class="tile__body">
+<h4 class="tile__title">Text encrypter / decrypter</h4>
+<p class="tile__desc">Hash or encrypt text; verify and decode safely.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Text encrypter / decrypter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/password-wallet.html" title="Password generator &amp; wallet">
+<div aria-hidden="true" class="tile__media">🔐</div>
+<div class="tile__body"><h4 class="tile__title">Password generator &amp; wallet</h4><p class="tile__desc">Create strong passwords and store them locally, securely.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Password generator &amp; wallet</span>
+</a></div>
+
+</div>
+</section>
+
+<!-- Media & Converters -->
+<section aria-labelledby="cat-media" class="stack" style="margin-top:var(--space-12)">
+<h3 id="cat-media">Media &amp; Converters</h3>
+
+<div class="grid tiles reveal">
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/file-converter.html" title="File converter">
+<div aria-hidden="true" class="tile__media">🔁</div>
+<div class="tile__body">
+<h4 class="tile__title">File converter</h4>
+<p class="tile__desc">Swap formats with no-nonsense controls.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open File converter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/colour-picker.html" title="Image colour picker">
+<div aria-hidden="true" class="tile__media">🎯</div>
+<div class="tile__body">
+<h4 class="tile__title">Image colour picker</h4>
+<p class="tile__desc">Sample, convert, and copy colour codes quickly.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Image colour picker</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/image-resizer.html" title="Image resizer">
+<div aria-hidden="true" class="tile__media">🖼️</div>
+<div class="tile__body">
+<h4 class="tile__title">Image resizer</h4>
+<p class="tile__desc">Resize and compress without losing clarity.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Image resizer</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/vectorise-image.html" title="Image vectoriser">
+<div aria-hidden="true" class="tile__media">🪒</div>
+<div class="tile__body">
+<h4 class="tile__title">Image vectoriser</h4>
+<p class="tile__desc">Transform pixels into precision—vectorise with ease.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Image vectoriser</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/qr-code-generator.html" title="QR code generator">
+<div aria-hidden="true" class="tile__media">▩</div>
+<div class="tile__body">
+<h4 class="tile__title">QR code generator</h4>
+<p class="tile__desc">Create crisp codes with custom sizing.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open QR code generator</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/yt-converter.html" title="YouTube to MP3/MP4 converter">
+<div aria-hidden="true" class="tile__media">▶︎</div>
+<div class="tile__body">
+<h4 class="tile__title">YouTube to MP3/MP4 converter</h4>
+<p class="tile__desc">Save media for offline access.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open YouTube to MP3/MP4 converter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/ocr-reader.html" title="OCR reader">
+<div aria-hidden="true" class="tile__media">📷</div>
+<div class="tile__body"><h4 class="tile__title">OCR reader</h4><p class="tile__desc">Extract text from images and PDFs, right in your browser.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open OCR reader</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/image-compressor.html" title="Image compressor">
+<div aria-hidden="true" class="tile__media">🗜️</div>
+<div class="tile__body"><h4 class="tile__title">Image compressor</h4><p class="tile__desc">Compress images to smaller sizes with quality control.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Image compressor</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/barcode-generator.html" title="Barcode generator">
+<div aria-hidden="true" class="tile__media">🧾</div>
+<div class="tile__body"><h4 class="tile__title">Barcode generator</h4><p class="tile__desc">Create barcodes (EAN, UPC, Code128, etc.) instantly.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Barcode generator</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/merge-pdfs.html" title="Merge PDFs">
+<div aria-hidden="true" class="tile__media">📎</div>
+<div class="tile__body"><h4 class="tile__title">Merge PDFs</h4><p class="tile__desc">Combine multiple PDFs into one, securely in your browser.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Merge PDFs</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/pdf-separator.html" title="PDF separator">
+<div aria-hidden="true" class="tile__media">✂️</div>
+<div class="tile__body"><h4 class="tile__title">PDF separator</h4><p class="tile__desc">Split a PDF into individual pages or ranges.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open PDF separator</span>
+</a></div>
+
+</div>
+</section>
+
+<!-- Utilities -->
+<section aria-labelledby="cat-utilities" class="stack" style="margin-top:var(--space-12)">
+<h3 id="cat-utilities">Utilities</h3>
+
+<div class="grid tiles reveal">
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/fake-information-generator.html" title="Fake infomation generator">
+<div aria-hidden="true" class="tile__media">🧪</div>
+<div class="tile__body">
+<h4 class="tile__title">Fake infomation generator</h4>
+<p class="tile__desc">Produce placeholder data and samples quickly.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Info generator</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/js-blocker.html" title="JavaScript blocker">
+<div aria-hidden="true" class="tile__media">🧱</div>
+<div class="tile__body">
+<h4 class="tile__title">JavaScript blocker</h4>
+<p class="tile__desc">Test pages with scripts disabled in one click.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open JavaScript blocker</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/metadata-reader.html" title="Metadata reade">
+<div aria-hidden="true" class="tile__media">🗂️</div>
+<div class="tile__body">
+<h4 class="tile__title">Metadata reader</h4>
+<p class="tile__desc">Peek inside files without uploading anywhere.</p>
+</div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Metadata reader</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/url-shortener.html" title="URL shortener">
+<div aria-hidden="true" class="tile__media">🔗</div>
+<div class="tile__body"><h4 class="tile__title">URL shortener</h4><p class="tile__desc">Shorten long links for easy sharing.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open URL shortener</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/url-lengthener.html" title="URL lengthener">
+<div aria-hidden="true" class="tile__media">🔗</div>
+<div class="tile__body"><h4 class="tile__title">URL lengthener</h4><p class="tile__desc">Expand shortened links to reveal the final destination.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open URL lengthener</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/unit-converter.html" title="Unit converter">
+<div aria-hidden="true" class="tile__media">📏</div>
+<div class="tile__body"><h4 class="tile__title">Unit converter</h4><p class="tile__desc">Convert length, weight, temperature, and more.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Unit converter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/time-zone-converter.html" title="Time zone converter">
+<div aria-hidden="true" class="tile__media">🕰️</div>
+<div class="tile__body"><h4 class="tile__title">Time zone converter</h4><p class="tile__desc">Find the best meeting time across time zones.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Time zone converter</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/date-difference.html" title="Date difference calculator">
+<div aria-hidden="true" class="tile__media">📅</div>
+<div class="tile__body"><h4 class="tile__title">Date difference calculator</h4><p class="tile__desc">Calculate days, weeks, or months between dates.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Date difference calculator</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/typing-speed-test.html" title="Typing speed test">
+<div aria-hidden="true" class="tile__media">⌨️</div>
+<div class="tile__body"><h4 class="tile__title">Typing speed test</h4><p class="tile__desc">Test your WPM with a clean, distraction‑free UI.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Typing speed test</span>
+</a></div>
+
+<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/random-spinner.html" title="Random picker / spinner">
+<div aria-hidden="true" class="tile__media">🎲</div>
+<div class="tile__body"><h4 class="tile__title">Random picker / spinner</h4><p class="tile__desc">Pick a random choice or spin a wheel.</p></div>
+<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
+<span class="sr-only">Open Random picker / spinner</span>
+</a></div>
+
+</div>
+</section>
+
+</div>
+</section>
+<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
+<div class="container" style="text-align:center">
+<p class="fine" style="margin:0">
+        © <span id="year">2025</span> riyst.com
+      </p>
+</div>
+</footer>
+<script>
+  (function(){
+    const qs = (s, el=document) => el.querySelector(s);
+    const y = qs('#year'); if (y) y.textContent = new Date().getFullYear();
+
+    /* Reveal-on-scroll */
+    const reveals = document.querySelectorAll('.reveal');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reveals.length){
+      if (prefersReduced){ reveals.forEach(el => el.classList.add('reveal-in')); }
+      else if ('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(entry=>{
+            if (entry.isIntersecting){ entry.target.classList.add('reveal-in'); io.unobserve(entry.target); }
+          });
+        }, {rootMargin:'0px 0px -20% 0px'});
+        reveals.forEach(el => io.observe(el));
+      } else { reveals.forEach(el => el.classList.add('reveal-in')); }
+    }
+
+    /* Anchor focus aid */
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target){ setTimeout(()=>{ target.setAttribute('tabindex','-1'); target.focus({preventScroll:true}); }, 150); }
+    });
+  })();
+  </script>
+<script>
+(function(){
+  const ready = (fn) => (document.readyState !== 'loading') ? fn() : document.addEventListener('DOMContentLoaded', fn);
+  ready(() => {
+    const btn = document.getElementById('backToTop');
+    const firstHeading = document.querySelector('section.stack h3[id]');
+
+    if ('IntersectionObserver' in window && firstHeading && btn) {
+      const io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) btn.classList.remove('show');
+        else btn.classList.add('show');
+      }, {rootMargin: "-96px 0px 0px 0px", threshold: 0});
+      io.observe(firstHeading);
+    } else if (btn) {
+      const threshold = (firstHeading?.getBoundingClientRect().top || 600);
+      const onScroll = () => {
+        if (window.scrollY > threshold) btn.classList.add('show'); else btn.classList.remove('show');
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    }
+
+    btn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+})();
+</script><script>
+// Live Search (injected)
+(function(){
+  function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  ready(function(){
+    var input = document.getElementById('toolSearch');
+    if(!input) return;
+    var hint = document.getElementById('searchHint');
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
+    var total = tiles.length;
+    function updateHint(q, shown){
+      if(!hint) return;
+      if(!q){ hint.textContent = 'Showing all ' + total + ' tools.'; return; }
+      if(shown === 0){ hint.textContent = 'No matches for \"' + q + '\".'; return; }
+      hint.textContent = 'Showing ' + shown + ' of ' + total + ' for \"' + q + '\".';
+    }
+    function filter(){
+      var q = input.value.toLowerCase().trim();
+      var shown = 0;
+      tiles.forEach(function(tile){
+        var titleEl = tile.querySelector('.tile__title');
+        var txt = (titleEl ? titleEl.textContent : tile.textContent || '').toLowerCase();
+        var match = q === '' || txt.indexOf(q) !== -1;
+        if(match){ tile.removeAttribute('hidden'); shown++; } else { tile.setAttribute('hidden',''); }
+      });
+      updateHint(q, shown);
+    }
+    input.addEventListener('input', filter, {passive:true});
+    // initialize on load
+    updateHint('', tiles.length);
+  });
+
+  // Back-to-top visibility if a #backToTop button exists
+  var backBtn = document.getElementById('backToTop');
+  if(backBtn){
+    var toggle = function(){
+      if(window.scrollY > 400){ backBtn.classList.add('show'); } else { backBtn.classList.remove('show'); }
+    };
+    window.addEventListener('scroll', toggle, {passive:true});
+    toggle();
+  }
+})();
+</script>
+<script>
+(function(){
+  function ready(fn){ if(document.readyState!=='loading'){fn();} else {document.addEventListener('DOMContentLoaded', fn);} }
+  ready(function(){
+    var input = document.getElementById('toolSearch');
+    var hint = document.getElementById('searchHint');
+    var container = document.querySelector('#tools .container');
+    if(!input || !hint || !container) return;
+
+    var tiles = Array.prototype.slice.call(container.querySelectorAll('.tile'));
+    var total = tiles.length;
+
+    function visibleCount(){
+      var n = 0;
+      tiles.forEach(function(tile){
+        var hiddenByFilter = tile.style.display === 'none';
+        var hiddenBySearch = tile.getAttribute('data-search-hide') === '1';
+        if(!hiddenByFilter && !hiddenBySearch) n++;
+      });
+      return n;
+    }
+
+    function updateHint(){
+      hint.textContent = 'Showing ' + visibleCount() + ' tools';
+    }
+
+    function filter(){
+      var q = input.value.toLowerCase().trim();
+      tiles.forEach(function(tile){
+        var titleEl = tile.querySelector('.tile__title');
+        var txt = (titleEl ? titleEl.textContent : tile.textContent || '').toLowerCase();
+        var match = q === '' || txt.indexOf(q) !== -1;
+        if(match){ tile.removeAttribute('data-search-hide'); } else { tile.setAttribute('data-search-hide','1'); }
+      });
+      updateHint();
+    }
+
+    input.addEventListener('input', function(){ filter(); }, {passive:true});
+
+    // Observe visibility changes (e.g. when category filters are applied)
+    var mo = new MutationObserver(updateHint);
+    mo.observe(container, {subtree:true, attributes:true, attributeFilter:['style','data-search-hide']});
+
+    updateHint();
+  });
+
+  // Mobile spacing behavior same as Powerful Sites
+  document.addEventListener('click', function(e){
+    var nav = document.querySelector('nav.catnav[aria-label=\"Categories\"]');
+    if(!nav) return;
+    var wrap = e.target.closest('nav.catnav[aria-label=\"Categories\"] .chipwrap.chip--with-sub');
+    if(!wrap) return;
+    if(window.matchMedia('(hover: none) and (pointer: coarse)').matches){
+      nav.classList.toggle('open', wrap.classList.contains('open'));
+    }
+  }, true);
+})();
+</script>
+</body>
+</html>

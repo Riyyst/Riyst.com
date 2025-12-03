@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+  <style>
+    :root{
+      --bg:#0b0b0e; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --panel:#121219; --max-w:1100px; --ctl-h:46px; --gap:14px; --radius:12px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:1rem 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent}
+    .nav__link:hover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6);text-decoration:none}
+
+    .intro{position:relative;text-align:center;padding:clamp(2rem,6vw,4rem) 0 1.5rem;background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title{margin:.2rem auto .4rem auto;line-height:1.02;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:1000;letter-spacing:.4px}
+    .intro__subtitle{margin:0 auto;color:var(--muted);font-weight:800}
+
+    .tool{padding:2.2rem 0 4rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+          border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45);
+          padding:1.6rem;max-width:980px;margin:0 auto}
+    .row{display:flex;justify-content:center;gap:var(--gap);flex-wrap:wrap;margin-top:var(--gap)}
+    .full{min-width:260px;max-width:100%;flex:1 1 720px}
+
+    label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.35rem}
+
+    .drop-merge{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;
+      border:1px dashed rgba(255,255,255,.22);background:rgba(255,255,255,.05);padding:10px 12px;border-radius:12px;
+      color:#e7e6ff;font-weight:800;cursor:pointer;text-align:center;min-height:var(--ctl-h); position:relative}
+    .drop-merge input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .drop-merge.dragover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.55)}
+
+    .filename{color:var(--muted);font-size:.9rem;text-align:center;margin-top:.5rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .filelist{color:#cbd5e1;font-size:.95rem;margin-top:.6rem;text-align:left;max-height:180px;overflow:auto;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.5rem .75rem;background:rgba(255,255,255,.03)}
+    .filelist ol{padding-left:1.1rem;margin:0}
+    .filelist li{margin:.15rem 0;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+    .filelist .name{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    /* Center the × perfectly */
+    .filelist .remove{
+      flex:0 0 auto;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#e7e6ff;
+      width:24px;height:24px;border-radius:999px;display:grid;place-items:center;
+      font-weight:900;font-size:14px;line-height:1;cursor:pointer;padding:0;user-select:none;
+    }
+    .filelist .remove:hover{animation:pressPulse 1.2s ease-in-out infinite;text-decoration:none}
+
+    .error{color:#ffb4b4}
+
+    .progress{margin-top:10px;text-align:center;color:#cbd5e1;font-size:.95rem}
+
+    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+         background:rgba(255,255,255,.07);color:#e7e6ff;font-weight:900;box-shadow:none;
+         transition:transform .12s ease, opacity .2s ease, filter .2s ease}
+    .btn:not([disabled]):hover{animation:pressPulse 1.2s ease-in-out infinite;text-decoration:none}
+    .btn[disabled]{opacity:.45;cursor:not-allowed;filter:grayscale(.45) brightness(.9)}
+    .btn-primary{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;border-color:transparent}
+
+    .hidden{display:none !important}
+    @keyframes pressPulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+    footer.site-footer{padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.06)}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../home.html">Home</a></li>
+          <li><a class="nav__link" href="../about.html">About</a></li>
+          <li><a class="nav__link" href="../tools.html">Tools</a></li>
+          <li><a class="nav__link" href="../contact.html">Contact</a></li>
+          <li><a class="nav__link" href="../privacy.html">Privacy</a></li>
+          <li><a class="nav__link" href="../terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="container">
+        <h1 class="intro__title">Merge PDFs</h1>
+        <p class="intro__subtitle">Upload → Merge → Download. Client-side merge; page order follows upload order.</p>
+      </div>
+    </section>
+
+    <section class="tool">
+      <div class="card">
+        <div class="row">
+          <div class="full">
+            <label for="files">Upload PDFs (2 or more)</label>
+            <label class="drop-merge" id="dropZone">
+              <input id="files" type="file" accept=".pdf,application/pdf" multiple />
+              <span id="dropText">Click to choose PDFs or drag &amp; drop here</span>
+            </label>
+            <div class="filename" id="fileSummary">No files selected</div>
+            <div id="fileList" class="filelist hidden" aria-live="polite"></div>
+
+            <div class="progress" id="status"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="run" class="btn btn-primary hidden" disabled>Merge</button>
+          <a id="download" class="btn hidden" href="#" download disabled>Download</a>
+          <button id="clear" class="btn hidden">Clear</button>
+        </div>
+
+        <p class="filename error" id="err" role="alert" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="filename">© 2025 riyst.com — All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <script>
+  /* ===== Wiring matches OCR Reader page (colors, pulsing, actions) ===== */
+  const $ = s => document.querySelector(s);
+
+  const fileInput  = $("#files");
+  const dropZone   = $("#dropZone");
+  const fileSummary= $("#fileSummary");
+  const fileListEl = $("#fileList");
+  const statusEl   = $("#status");
+  const runBtn     = $("#run");
+  const dlBtn      = $("#download");
+  const clearBtn   = $("#clear");
+  const errEl      = $("#err");
+
+  let files = [];         // Array<File>
+  let outBlob = null;
+  let outName = "";
+
+  function show(el){ el && el.classList.remove("hidden"); }
+  function hide(el){ el && el.classList.add("hidden"); }
+  function setStatus(m){ statusEl.textContent = m || ""; }
+  function stem(name){ const i = name.toLowerCase().lastIndexOf(".pdf"); return i>-1 ? name.slice(0,i) : name; }
+  function makeOutputName(){ if(!files.length) return "merged.pdf"; return stem(files[0].name) + " Merged.pdf"; }
+
+  function updateRunVisibility(){
+    if(files.length >= 2){
+      runBtn.classList.remove("hidden");
+      runBtn.removeAttribute("disabled");
+    }else{
+      runBtn.classList.add("hidden");
+      runBtn.setAttribute("disabled","");
+    }
+  }
+
+  function resetUI(full=true){
+    setStatus(""); errEl.textContent="";
+    hide(dlBtn); hide(clearBtn); dlBtn.setAttribute("disabled",""); dlBtn.removeAttribute("href");
+    if(full){ files = []; fileInput.value=""; fileSummary.textContent="No files selected"; fileListEl.innerHTML=""; hide(fileListEl); }
+    updateRunVisibility();
+  }
+
+  function summarizeFiles(){
+    if(!files.length){ fileSummary.textContent = "No files selected"; hide(fileListEl); updateRunVisibility(); return; }
+    fileSummary.textContent = files.length + " file(s) selected";
+    const ol = document.createElement("ol");
+    files.forEach((f, idx)=>{
+      const li = document.createElement("li");
+      const nameSpan = document.createElement("span");
+      nameSpan.className = "name";
+      nameSpan.textContent = f.name;
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "remove";
+      removeBtn.setAttribute("type","button");
+      removeBtn.setAttribute("aria-label", "Remove " + f.name);
+      removeBtn.dataset.index = idx;
+      removeBtn.textContent = "×";
+      li.appendChild(nameSpan);
+      li.appendChild(removeBtn);
+      ol.appendChild(li);
+    });
+    fileListEl.innerHTML = ""; fileListEl.appendChild(ol); show(fileListEl);
+    updateRunVisibility();
+  }
+
+  // Remove handler (event delegation)
+  fileListEl.addEventListener("click", (e)=>{
+    const btn = e.target.closest("button.remove");
+    if(!btn) return;
+    const idx = parseInt(btn.dataset.index, 10);
+    if(Number.isInteger(idx)){
+      files.splice(idx, 1);
+      summarizeFiles();
+    }
+  });
+
+  dropZone.addEventListener("dragover", e=>{ e.preventDefault(); dropZone.classList.add("dragover"); });
+  dropZone.addEventListener("dragleave", ()=> dropZone.classList.remove("dragover"));
+  dropZone.addEventListener("drop", e=>{
+    e.preventDefault(); dropZone.classList.remove("dragover"); setStatus("");
+    const picked = Array.from(e.dataTransfer.files || []).filter(f=>/pdf$/i.test(f.type) || /\.pdf$/i.test(f.name));
+    if(picked.length){ files = picked; summarizeFiles(); }
+    else{ errEl.textContent = "Please drop PDF files."; }
+  });
+
+  fileInput.addEventListener("change", e=>{
+    setStatus("");
+    const picked = Array.from(e.target.files || []).filter(f=>/pdf$/i.test(f.type) || /\.pdf$/i.test(f.name));
+    if(picked.length){ files = picked; summarizeFiles(); }
+    else{ errEl.textContent = "Please select at least 2 PDF files."; }
+  });
+
+  clearBtn.addEventListener("click", ()=> resetUI(true));
+  dropZone.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fileInput.click(); } });
+
+  async function mergePDFs(files){
+    const { PDFDocument } = PDFLib;
+    const out = await PDFDocument.create();
+    let totalPages = 0;
+
+    setStatus("Reading files…");
+    const buffers = [];
+    for(let i=0;i<files.length;i++){
+      const ab = await files[i].arrayBuffer();
+      buffers.push(ab);
+    }
+
+    for(let i=0;i<buffers.length;i++){
+      const src = await PDFDocument.load(buffers[i]);
+      const pageIndices = src.getPageIndices();
+      const copied = await out.copyPages(src, pageIndices);
+      copied.forEach(p=> out.addPage(p));
+      totalPages += copied.length;
+      setStatus(`Merged ${i+1}/${buffers.length} (${totalPages} page${totalPages!==1?"s":""})…`);
+    }
+
+    setStatus("Finalizing…");
+    const bytes = await out.save({ useObjectStreams:false });
+    return new Blob([bytes], { type: "application/pdf" });
+  }
+
+  runBtn.addEventListener("click", async ()=>{
+    errEl.textContent = "";
+    if(files.length < 2){ errEl.textContent = "Please select at least 2 PDFs to merge."; return; }
+    runBtn.setAttribute("disabled","");
+    hide(dlBtn); hide(clearBtn); setStatus("Starting…");
+
+    try{
+      const outName = makeOutputName();
+      const outBlob = await mergePDFs(files);
+      const url = URL.createObjectURL(outBlob);
+      dlBtn.href = url;
+      dlBtn.download = outName;
+      dlBtn.removeAttribute("disabled");
+      show(dlBtn); show(clearBtn);
+      setStatus("All done — Ready for download");
+      // Hide the Merge button after success
+      runBtn.classList.add("hidden");
+    }catch(err){
+      console.error(err);
+      errEl.textContent = (err && err.message) ? err.message : "Something went wrong during merge.";
+      setStatus("");
+      updateRunVisibility();
+    }finally{
+      runBtn.removeAttribute("disabled");
+    }
+  });
+
+  resetUI(true);
+  </script>
+</body>
+</html>

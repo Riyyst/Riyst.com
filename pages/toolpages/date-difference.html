@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TEXT TO EDIT</title>
+<meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
+<meta content="#0b0b0e" name="theme-color"/>
+
+<!-- Social Preview Tags -->
+<meta content="website" property="og:type"/>
+<meta content="riyst.com" property="og:site_name"/>
+<meta content="Powerful websites — riyst.com" property="og:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." property="og:description"/>
+<meta content="https://riyst.com/pages/tools.html" property="og:url"/>
+<meta content="https://riyst.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Powerful websites — riyst.com" name="twitter:title"/>
+<meta content="Search tools by category. Fast, privacy-first utilities." name="twitter:description"/>
+<meta content="https://riyst.com/og-image.jpg" name="twitter:image"/>
+<!-- JSON-LD WebSite schema -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "riyst.com",
+    "url": "https://riyst.com",
+    "description": "Tools for builders, made simple.",
+    "publisher": { "@type": "Organization", "name": "riyst.com" }
+  }
+  </script>
+
+<!-- Favicon -->
+<link href="../../media/favicon.ico" rel="icon"/>
+
+<!-- Style -->
+  <style>
+    :root{
+      --bg:#0b0b0e; --text:#f6f7fb; --muted:#a6abbb; --accent:#8b5cf6;
+      --panel:#121219; --max-w:1100px; --ctl-h:46px; --gap:14px; --radius:12px;
+      --select-bg: rgba(255,255,255,.07);
+      --select-border: rgba(255,255,255,.18);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Helvetica,Arial}
+    a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+    .container{width:min(var(--max-w),100% - 2rem);margin-inline:auto}
+
+    header.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(18,18,25,.92),rgba(18,18,25,.6) 60%,transparent);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .mast{display:flex;justify-content:center;align-items:center;padding:1rem 0;min-height:56px}
+    .nav__list{display:flex;align-items:center;justify-content:center;gap:.25rem;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+    .nav__link{display:inline-block;padding:.5rem .9rem;border-radius:999px;border:1px solid transparent}
+    .nav__link:hover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.6);text-decoration:none}
+    .nav__link--highlight{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
+
+    .intro{position:relative;text-align:center;padding:clamp(2rem,6vw,4rem) 0 1rem;background:linear-gradient(180deg, rgba(139,92,246,.08), transparent 30%)}
+    .intro__title{margin:.2rem auto .4rem auto;line-height:1.02;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:1000;letter-spacing:.4px}
+    .intro__subtitle{margin:0 auto;color:var(--muted);font-weight:800}
+
+    .tool{padding:2.4rem 0 3rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+          border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45);
+          padding:1.4rem;max-width:980px;margin:0 auto}
+    .row{display:flex;gap:var(--gap);flex-wrap:wrap;align-items:flex-start;justify-content:center;margin-top:var(--gap)}
+    .col{flex:1 1 300px;min-width:260px;max-width:460px}
+    label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.35rem}
+    input[type="datetime-local"]{
+      height:var(--ctl-h);width:100%;padding:0 12px;border-radius:12px;border:1px solid var(--select-border);
+      background:var(--select-bg);color:#e7e6ff;outline:none;appearance:none;
+      color-scheme: dark; /* dark mode popup for supported browsers */
+    }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator{
+      filter: invert(1) brightness(.9) contrast(1);
+      opacity:.9;
+    }
+
+    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:.8rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+         background:rgba(255,255,255,.07);color:#e7e6ff;font-weight:900;box-shadow:none;
+         transition:transform .12s ease, opacity .2s ease, filter .2s ease}
+    .btn.small{padding:.45rem .85rem}
+    .btn:not([disabled]):hover{animation:pulse 1.2s ease-in-out infinite;text-decoration:none}
+    .btn:active{transform:translateY(0)}
+    .btn[disabled]{opacity:.45;cursor:not-allowed;filter:grayscale(.45) brightness(.9)}
+    .btn.primary{background:linear-gradient(135deg,#7aa2ff,#b18bff);color:#0e061d;border-color:transparent;box-shadow:none}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(139,92,246,.35)}70%{box-shadow:0 0 0 12px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+
+    .head{font-weight:1000;margin:0 0 .35rem 0}
+    .panel{border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#0a0f1a;padding:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .kv{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .kv b{font-weight:900}
+    .hl{font-weight:900;color:#e7e6ff}
+    footer.site-footer{padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.06);text-align:center}
+    .visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+  </style>
+
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../home.html">Home</a></li>
+          <li><a class="nav__link" href="../about.html">About</a></li>
+          <li><a class="nav__link" href="../tools.html">Tools</a></li>
+          <li><a class="nav__link" href="../contact.html">Contact</a></li>
+          <li><a class="nav__link" href="../privacy.html">Privacy</a></li>
+          <li><a class="nav__link" href="../terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="intro">
+      <div class="container">
+        <h1 class="intro__title">Date Difference</h1>
+        <p class="intro__subtitle">Calculate the exact time difference between two dates or moments.</p>
+      </div>
+    </section>
+
+    <section class="tool">
+      <div class="container">
+        <div class="card" role="region" aria-label="Date difference calculator">
+
+          <div class="row">
+            <div class="col">
+              <h3 class="head">Date Difference</h3>
+              <label for="diffStart">Start</label>
+              <input id="diffStart" type="datetime-local" aria-label="Start date and time" />
+              <div style="height:8px"></div>
+              <label for="diffEnd">End</label>
+              <input id="diffEnd" type="datetime-local" aria-label="End date and time" />
+              <div class="actions">
+                <button id="calcDiff" class="btn primary">Calculate</button>
+                <button id="resetDiff" class="btn small">Reset</button>
+              </div>
+            </div>
+            <div class="col">
+              <label class="visually-hidden" for="diffOut">Result</label>
+              <div class="panel" id="diffOut" aria-live="polite">
+                <div class="grid">
+                  <div class="kv"><span>Elapsed:</span><b id="elapsedText" class="hl">—</b></div>
+                  <div class="kv"><span>Total seconds:</span><b id="sTotal">—</b></div>
+                  <div class="kv"><span>Total minutes:</span><b id="mTotal">—</b></div>
+                  <div class="kv"><span>Total hours:</span><b id="hTotal">—</b></div>
+                  <div class="kv"><span>Total days:</span><b id="dTotal">—</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © <span id="yearNow"></span> riyst.com
+    </div>
+  </footer>
+
+<script>
+const $ = sel => document.querySelector(sel);
+const fromDatetimeLocalValue = (val) => {
+  if(!val) return null;
+  const [date, time] = val.split('T');
+  const [y,m,da] = date.split('-').map(Number);
+  let h=0, mi=0;
+  if(time){ [h,mi] = time.split(':').map(Number); }
+  return new Date(y, m-1, da, h, mi, 0, 0);
+};
+
+function calendarDiff(a, b){
+  let start = new Date(a), end = new Date(b);
+  const sign = (end - start) >= 0 ? 1 : -1;
+  if(sign < 0){ [start, end] = [end, start]; }
+
+  let years = end.getFullYear() - start.getFullYear();
+  let months = end.getMonth() - start.getMonth();
+  let days = end.getDate() - start.getDate();
+  let hours = end.getHours() - start.getHours();
+  let minutes = end.getMinutes() - start.getMinutes();
+  let seconds = end.getSeconds() - start.getSeconds();
+
+  if(seconds < 0){ seconds += 60; minutes--; }
+  if(minutes < 0){ minutes += 60; hours--; }
+  if(hours < 0){ hours += 24; days--; }
+  if(days < 0){
+    const prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+    days += prevMonth.getDate();
+    months--;
+  }
+  if(months < 0){ months += 12; years--; }
+
+  return { years, months, days, hours, minutes, seconds };
+}
+
+function calcDifference(){
+  const a = fromDatetimeLocalValue($('#diffStart').value);
+  const b = fromDatetimeLocalValue($('#diffEnd').value);
+  if(!a || !b){ return; }
+  const ms = b - a;
+  const abs = Math.abs(ms);
+  $('#sTotal').textContent = Math.floor(abs/1000).toLocaleString();
+  $('#mTotal').textContent = Math.floor(abs/60000).toLocaleString();
+  $('#hTotal').textContent = Math.floor(abs/3600000).toLocaleString();
+  $('#dTotal').textContent = (abs/86400000).toLocaleString(undefined, { maximumFractionDigits: 6 });
+
+  const cal = calendarDiff(a, b);
+  const parts = [];
+  if(cal.years) parts.push(cal.years + ' year' + (cal.years!==1?'s':''));
+  if(cal.months) parts.push(cal.months + ' month' + (cal.months!==1?'s':''));
+  if(cal.days) parts.push(cal.days + ' day' + (cal.days!==1?'s':''));
+  if(cal.hours) parts.push(cal.hours + ' hour' + (cal.hours!==1?'s':''));
+  if(cal.minutes) parts.push(cal.minutes + ' minute' + (cal.minutes!==1?'s':''));
+  if(cal.seconds || parts.length===0) parts.push(cal.seconds + ' second' + (cal.seconds!==1?'s':''));
+  $('#elapsedText').textContent = parts.join(', ');
+}
+
+$('#calcDiff').addEventListener('click', calcDifference);
+$('#resetDiff').addEventListener('click', ()=>{
+  $('#diffStart').value = ''; $('#diffEnd').value = '';
+  ['elapsedText','sTotal','mTotal','hTotal','dTotal'].forEach(id=>{ $('#'+id).textContent='—'; });
+});
+document.querySelector('#yearNow').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
