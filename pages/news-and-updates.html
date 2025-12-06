@@ -106,17 +106,14 @@
     .tile__title{font-size:1.1rem;margin:0;font-weight:900}
     .tile__desc{color:var(--muted);margin:0}
 
-    /* Go circle */
-    .go{position:absolute;right:10px;bottom:10px;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);background:rgba(139,92,246,.12);box-shadow:inset 0 0 0 2px rgba(139,92,246,.18);transition:transform var(--dur), background var(--dur), border-color var(--dur);pointer-events:none}
-    .tile:hover .go{transform:translateX(2px);background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.9)}
-    .go__arrow{font-size:1.05rem;font-weight:1000;line-height:1}
+    
 
     /* Reveal-on-scroll */
     .reveal [data-reveal]{opacity:0;transform:translateY(10px)}
     .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
 
     /* Footer */
-    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    footer.site-footer{padding:0.75rem 0 1.25rem;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .footer__grid{display:grid;gap:var(--space-6)}
     @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
     .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
@@ -131,6 +128,13 @@ header.site-header {
   max-width: none;
   padding: var(--space-3) 0;
 }
+
+    /* Layout: sticky footer */
+    html, body { min-height: 100%; }
+    body { display:flex; flex-direction:column; }
+    main { flex:1; }
+    .site-footer { margin-top:auto; }
+
 </style>
 <style>
 /* Injected: anchor offset & Back-to-Top */
@@ -222,23 +226,49 @@ header.site-header {
 
 /* Tight gap between chips and search bar (≈2px) */
 .news-hero .chips{margin-bottom: 16px;}
+
+    /* Footer */
+    .fine{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    footer.site-footer{
+      padding:0.75rem 0 1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .footer-legal{
+      margin-top:var(--space-2);
+      display:flex;
+      justify-content:center;
+      gap:var(--space-3);
+      font-size:.85rem;
+    }
+    .footer-legal a{
+      color:var(--accent);
+    }
+    .footer-legal a:hover{
+      text-decoration:underline;
+    }
 </style></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" role="banner">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Navigation Bar -->
+  <header class="site-header" role="banner">
     <div class="container mast">
       <nav class="nav" aria-label="Primary">
         <ul class="nav__list">
-          <li><a class="nav__link" href="home.html">Home</a></li>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
           <li><a class="nav__link" href="tools.html">Tools</a></li>
-          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
-          <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link nav__link--highlight" href="news-and-updates.html">News & Updates</a></li>
           <li><a class="nav__link" href="about.html">About</a></li>
-          <li><a class="nav__link" href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
   
 <section class="intro news-hero">
   <div class="container">
@@ -275,7 +305,6 @@ header.site-header {
     <h4 id="card-1" class="tile__title">Privacy policy review</h4>
     <p class="tile__desc">We clarified data retention and cookie use. No changes to your controls.</p>
   </div>
-  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
 </a>
 
 <a class="tile" href="#terms-update" aria-labelledby="card-2">
@@ -284,7 +313,6 @@ header.site-header {
     <h4 id="card-2" class="tile__title">Terms of use updated</h4>
     <p class="tile__desc">Simpler language and a short summary section at the top.</p>
   </div>
-  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
 </a>
     </div>
   </div>
@@ -303,7 +331,6 @@ header.site-header {
     <h4 id="card-101" class="tile__title">Tools page refreshed</h4>
     <p class="tile__desc">Improved layout and faster load times on the Tools page. Added clearer descriptions and quick links.</p>
   </div>
-  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
 </a>
 
 <a class="tile" href="#accessibility-update" aria-labelledby="card-102">
@@ -312,7 +339,6 @@ header.site-header {
     <h4 id="card-102" class="tile__title">Accessibility improvements</h4>
     <p class="tile__desc">Better keyboard focus states and higher-contrast buttons across the site.</p>
   </div>
-  <span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
 </a>
     </div>
   </div>
@@ -321,13 +347,19 @@ header.site-header {
 </main>
 
 
-<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
-<div class="container" style="text-align:center">
-<p class="fine" style="margin:0">
-        © <span id="year">2025</span> riyst.com
+<!-- Footer -->
+  <footer class="site-footer" role="contentinfo" >
+    <div class="container" style="text-align:center; position:relative;">
+      <p class="fine" style="margin:0">
+        &copy; <span id="year">2025</span> riyst.com
       </p>
-</div>
-</footer>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://buymeacoffee.com/riyst">Support/Donate</a>
+      </div>
+    </div>
+  </footer>
 <a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
 <script>
 (function(){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>TEXT TO EDIT</title>
+<title>Temporary Email</title>
 <meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
 <meta content="#0b0b0e" name="theme-color"/>
 
@@ -57,7 +57,7 @@ header.site-header{position:sticky;top:0;z-index:9999;background:linear-gradient
 .muted{color:var(--muted)}
 
 /* Footer */
-footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);text-align:center}
+footer.site-footer{padding:0.75rem 0 1.25rem;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);text-align:center}
 
 /* App container */
 .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.10);border-radius:var(--r-2);box-shadow:0 10px 30px rgba(0,0,0,.45);padding:1rem;position:relative}
@@ -137,25 +137,57 @@ footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);col
 .actions{display:flex;gap:.6rem;margin-top:.6rem}
 .secondary{background:rgba(255,255,255,.12);color:#fff}
 .hide{display:none!important}
+
+    /* Footer */
+    .fine{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    footer.site-footer{
+      padding:0.75rem 0 1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .footer-legal{
+      margin-top:var(--space-2);
+      display:flex;
+      justify-content:center;
+      gap:var(--space-3);
+      font-size:.85rem;
+    }
+    .footer-legal a{
+      color:var(--accent);
+    }
+    .footer-legal a:hover{
+      text-decoration:underline;
+    }
+
+    /* Layout: sticky footer */
+    html, body { min-height: 100%; }
+    body { display:flex; flex-direction:column; }
+    main { flex:1; }
+    .site-footer { margin-top:auto; }
+
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" role="banner">
-  <div class="container mast">
-    <nav class="nav" aria-label="Primary">
-      <ul class="nav__list">
-        <li><a class="nav__link" href="../home.html">Home</a></li>
-        <li><a class="nav__link" href="../about.html">About</a></li>
-        <li><a class="nav__link" href="../tools.html">Tools</a></li>
-        <li><a class="nav__link" href="../contact.html">Contact</a></li>
-        <li><a class="nav__link" href="../privacy.html">Privacy</a></li>
-        <li><a class="nav__link" href="../terms.html">Terms</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<!-- Navigation Bar -->
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../../index.html">Home</a></li>
+          <li><a class="nav__link" href="../tools.html">Tools</a></li>
+          <li><a class="nav__link" href="powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="../news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
 
 <main id="main" tabindex="-1">
   <section class="intro">
@@ -319,9 +351,19 @@ footer.site-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);col
   </section>
 </main>
 
-<footer class="site-footer" role="contentinfo">
-  <div class="container">&copy; <span id="year">2025</span> riyst.com</div>
-</footer>
+<!-- Footer -->
+  <footer class="site-footer" role="contentinfo" >
+    <div class="container" style="text-align:center; position:relative;">
+      <p class="fine" style="margin:0">
+        &copy; <span id="year">2025</span> riyst.com
+      </p>
+      <div class="footer-legal">
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://buymeacoffee.com/riyst">Support/Donate</a>
+      </div>
+    </div>
+  </footer>
 
 <script>
 const MAILSLURP_KEY   = "bc5dd01a4faf0a1c291e844fedda4d881ab433fbeef0094a94773c20b205d411";

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>TEXT TO EDIT</title>
+<title>Powerful websites</title>
 <meta content="Browse developer utilities on riyst.com — grouped by category with quick-jump filters." name="description"/>
 <meta content="#0b0b0e" name="theme-color"/>
 
@@ -116,14 +116,21 @@
     .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
 
     /* Footer */
-    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    footer.site-footer{padding:0.75rem 0 1.25rem;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .footer__grid{display:grid;gap:var(--space-6)}
     @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
     .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
     .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
     .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
     .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
-  </style>
+  
+    /* Layout: sticky footer */
+    html, body { min-height: 100%; }
+    body { display:flex; flex-direction:column; }
+    main { flex:1; }
+    .site-footer { margin-top:auto; }
+
+</style>
 <style>
 /* Filters: default 'off' state shows subdued grey look for buttons */
 button.chip{opacity:.7; filter: grayscale(1);}
@@ -498,24 +505,49 @@ nav.catnav[aria-label="Categories"]:has(.chipwrap .chip-dropdown:hover){margin-b
 @media (hover:none) and (pointer:coarse){
   nav.catnav[aria-label="Categories"].open{margin-bottom:220px;}
 }
-</style><style id="tile-wrap-display-contents">.tile-wrap{display:contents}</style></head>
+</style><style id="tile-wrap-display-contents">.tile-wrap{display:contents}
+    /* Footer */
+    .fine{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    footer.site-footer{
+      padding:0.75rem 0 1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .footer-legal{
+      margin-top:var(--space-2);
+      display:flex;
+      justify-content:center;
+      gap:var(--space-3);
+      font-size:.85rem;
+    }
+    .footer-legal a{
+      color:var(--accent);
+    }
+    .footer-legal a:hover{
+      text-decoration:underline;
+    }
+</style></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
-<header class="site-header" role="banner">
-<div class="container mast">
-<nav aria-label="Primary" class="nav">
-<ul class="nav__list">
-<!-- We are inside /pages/, so use sibling-relative links -->
-<li><a class="nav__link" href="../home.html">Home</a></li>
-<li><a class="nav__link" href="../about.html">About</a></li>
-<li><a class="nav__link" href="../tools.html">Tools</a></li>
-<li><a class="nav__link" href="../contact.html">Contact</a></li>
-<li><a class="nav__link" href="../privacy.html">Privacy</a></li>
-<li><a class="nav__link" href="../terms.html">Terms</a></li>
-</ul>
-</nav>
-</div>
-</header>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Navigation Bar -->
+  <header class="site-header" role="banner">
+    <div class="container mast">
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../../index.html">Home</a></li>
+          <li><a class="nav__link" href="../tools.html">Tools</a></li>
+          <li><a class="nav__link nav__link--highlight" href="powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="../news-and-updates.html">News & Updates</a></li>
+          <li><a class="nav__link" href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
 <main id="main" tabindex="-1"><section class="intro"><div class="container"><h1 class="intro__title--brand">Powerful websites</h1><p class="intro__subtitle">Curated tools for just for you</p></div></section><section aria-labelledby="tools-title" class="section" id="tools"><div class="container"><div class="section__head"><h2>Filters</h2><nav aria-label="Filters" class="catnav"><button aria-pressed="false" class="chip" data-filter="ai" type="button">AI</button><button aria-pressed="false" class="chip" data-filter="non-ai" type="button">Non-AI</button><button aria-pressed="false" class="chip" data-filter="free" type="button">Free</button><button aria-pressed="false" class="chip" data-filter="paid" type="button">Paid</button></nav></div><div class="section__head"><h2 id="tools-title">Browse by category</h2><nav aria-label="Categories" class="catnav"><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-tools-and-utilities">Tools &amp; Utilities</a><div class="chip-dropdown"><a class="chip" href="#sub-tools-and-utilities-everyday-utilities">Everyday Utilities</a><a class="chip" href="#sub-tools-and-utilities-developer-tools">Developer Tools</a><a class="chip" href="#sub-tools-and-utilities-general-utilities">General Utilities</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-image-and-video">Image &amp; Video</a><div class="chip-dropdown"><a class="chip" href="#sub-image-and-video-image-tools">Image Tools</a><a class="chip" href="#sub-image-and-video-video-tools">Video Tools</a><a class="chip" href="#sub-image-and-video-3d-and-visual-media">3D &amp; Visual Media</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-productivity-and-workflow">Productivity &amp; Workflow</a><div class="chip-dropdown"><a class="chip" href="#sub-productivity-and-workflow-writing-and-office-tools">Writing &amp; Office Tools</a><a class="chip" href="#sub-productivity-and-workflow-task-and-project-management">Task &amp; Project Management</a><a class="chip" href="#sub-productivity-and-workflow-workflow-and-automation">Workflow &amp; Automation</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-learning-and-education">Learning &amp; Education</a><div class="chip-dropdown"><a class="chip" href="#sub-learning-and-education-study-aids">Study Aids</a><a class="chip" href="#sub-learning-and-education-courses-and-tutorials">Courses &amp; Tutorials</a><a class="chip" href="#sub-learning-and-education-learning-platforms">Learning Platforms</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-fitness-and-health">Fitness &amp; Health</a><div class="chip-dropdown"><a class="chip" href="#sub-fitness-and-health-exercise-and-fitness">Exercise &amp; Fitness</a><a class="chip" href="#sub-fitness-and-health-health-and-wellness">Health &amp; Wellness</a><a class="chip" href="#sub-fitness-and-health-general-fitness-tools">General Fitness Tools</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-entertainment-and-fun">Entertainment &amp; Fun</a><div class="chip-dropdown"><a class="chip" href="#sub-entertainment-and-fun-games">Games</a><a class="chip" href="#sub-entertainment-and-fun-media-and-music">Media &amp; Music</a><a class="chip" href="#sub-entertainment-and-fun-fun-and-miscellaneous">Fun &amp; Miscellaneous</a></div></span><span class="chipwrap chip--with-sub"><a class="chip" href="#sec-other">Other</a><div class="chip-dropdown"><a class="chip" href="#sub-other-ai-and-experimental">AI &amp; Experimental</a><a class="chip" href="#sub-other-business-and-professional">Business &amp; Professional</a><a class="chip" href="#sub-other-miscellaneous-resources">Miscellaneous Resources</a></div></span></nav></div>
 <!-- Live Search (injected) -->
 <div aria-label="Filter sites" class="search" role="search">
@@ -6846,13 +6878,19 @@ No religion, conspiracies, aliens or pseudo-science</p>
 </div>
 </section>
 </div></section></main>
-<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
-<div class="container" style="text-align:center">
-<p class="fine" style="margin:0">
-        © <span id="year">2025</span> riyst.com
+<!-- Footer -->
+  <footer class="site-footer" role="contentinfo" >
+    <div class="container" style="text-align:center; position:relative;">
+      <p class="fine" style="margin:0">
+        &copy; <span id="year">2025</span> riyst.com
       </p>
-</div>
-</footer>
+      <div class="footer-legal">
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="https://buymeacoffee.com/riyst">Support/Donate</a>
+      </div>
+    </div>
+  </footer>
 <script>
   (function(){
     const qs = (s, el=document) => el.querySelector(s);

@@ -116,14 +116,21 @@
     .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
 
     /* Footer */
-    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    footer.site-footer{padding:0.75rem 0 1.25rem;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .footer__grid{display:grid;gap:var(--space-6)}
     @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
     .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
     .footer__links a,.social a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
     .footer__links a:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.12)}
     .footer__links a:focus-visible,.social a:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 4px rgba(139,92,246,.6)}
-  </style>
+  
+    /* Layout: sticky footer */
+    html, body { min-height: 100%; }
+    body { display:flex; flex-direction:column; }
+    main { flex:1; }
+    .site-footer { margin-top:auto; }
+
+</style>
 <style>
 /* Filters: default 'off' state shows subdued grey look for buttons */
 button.chip{opacity:.7; filter: grayscale(1);} 
@@ -481,24 +488,49 @@ nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-othe
     z-index: 71;
   }
 }
+
+    /* Footer */
+    .fine{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    footer.site-footer{
+      padding:0.75rem 0 1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .footer-legal{
+      margin-top:var(--space-2);
+      display:flex;
+      justify-content:center;
+      gap:var(--space-3);
+      font-size:.85rem;
+    }
+    .footer-legal a{
+      color:var(--accent);
+    }
+    .footer-legal a:hover{
+      text-decoration:underline;
+    }
 </style></head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Navigation Bar -->
   <header class="site-header" role="banner">
     <div class="container mast">
       <nav class="nav" aria-label="Primary">
         <ul class="nav__list">
-          <li><a class="nav__link nav__link--highlight" href="home.html">Home</a></li>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
           <li><a class="nav__link" href="tools.html">Tools</a></li>
-          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="toolpages/powerful-sites.html">Powerful Websites</a></li>
           <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
           <li><a class="nav__link" href="about.html">About</a></li>
-          <li><a class="nav__link" href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
 
 <main id="main" tabindex="-1">
   <section class="intro">
@@ -561,12 +593,18 @@ nav.catnav[aria-label="Categories"] .chipwrap.chip--with-sub > a[href="#sec-othe
   </section>
 </main>
 
-<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
-<div class="container" style="text-align:center">
-<p class="fine" style="margin:0">
-        © <span id="year">2025</span> riyst.com
+<!-- Footer -->
+  <footer class="site-footer" role="contentinfo" >
+    <div class="container" style="text-align:center; position:relative;">
+      <p class="fine" style="margin:0">
+        &copy; <span id="year">2025</span> riyst.com
       </p>
-</div>
-</footer>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://buymeacoffee.com/riyst">Support/Donate</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

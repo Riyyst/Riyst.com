@@ -116,7 +116,7 @@
     .reveal.reveal-in [data-reveal]{opacity:1;transform:none;transition:opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease)}
 
     /* Footer */
-    footer.site-footer{padding:var(--space-12) 0 var(--space-16);border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    footer.site-footer{padding:0.75rem 0 1.25rem;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .footer__grid{display:grid;gap:var(--space-6)}
     @media (min-width:48rem){.footer__grid{grid-template-columns:1fr auto}}
     .footer__links,.social{display:flex;gap:.6rem;flex-wrap:wrap}
@@ -131,6 +131,13 @@ header.site-header {
   max-width: none;
   padding: var(--space-3) 0;
 }
+
+    /* Layout: sticky footer */
+    html, body { min-height: 100%; }
+    body { display:flex; flex-direction:column; }
+    main { flex:1; }
+    .site-footer { margin-top:auto; }
+
 </style>
 <style>
 /* Injected: anchor offset & Back-to-Top */
@@ -166,25 +173,49 @@ header.site-header {
 @media (hover:none) and (pointer:coarse){
   nav.catnav[aria-label="Categories"].open{margin-bottom:220px;}
 }
-</style><style id="tile-wrap-display-contents">.tile-wrap{display:contents}</style></head>
+</style><style id="tile-wrap-display-contents">.tile-wrap{display:contents}
+    /* Footer */
+    .fine{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+    footer.site-footer{
+      padding:0.75rem 0 1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+    }
+    .footer-legal{
+      margin-top:var(--space-2);
+      display:flex;
+      justify-content:center;
+      gap:var(--space-3);
+      font-size:.85rem;
+    }
+    .footer-legal a{
+      color:var(--accent);
+    }
+    .footer-legal a:hover{
+      text-decoration:underline;
+    }
+</style></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><a aria-label="Go to the top" class="btn back-to-top" href="#" id="backToTop" title="Go to the top"><span aria-hidden="true" class="arrow"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path></svg></span> Top</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Navigation Bar -->
   <header class="site-header" role="banner">
     <div class="container mast">
       <nav class="nav" aria-label="Primary">
         <ul class="nav__list">
-          <li><a class="nav__link" href="home.html">Home</a></li>
+          <li><a class="nav__link" href="../index.html">Home</a></li>
           <li><a class="nav__link nav__link--highlight" href="tools.html">Tools</a></li>
-          <li><a class="nav__link" href="/toolpages/powerful-sites.html">Powerful Websites</a></li>
+          <li><a class="nav__link" href="toolpages/powerful-sites.html">Powerful Websites</a></li>
           <li><a class="nav__link" href="news-and-updates.html">News & Updates</a></li>
           <li><a class="nav__link" href="about.html">About</a></li>
-          <li><a class="nav__link" href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
 
 <!-- Minimal hero -->
 <section class="intro">
@@ -323,12 +354,7 @@ header.site-header {
 <span class="sr-only">Open Text encrypter / decrypter</span>
 </a></div>
 
-<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/password-wallet.html" title="Password generator &amp; wallet">
-<div aria-hidden="true" class="tile__media">🔐</div>
-<div class="tile__body"><h4 class="tile__title">Password generator &amp; wallet</h4><p class="tile__desc">Create strong passwords and store them locally, securely.</p></div>
-<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
-<span class="sr-only">Open Password generator &amp; wallet</span>
-</a></div>
+
 
 </div>
 </section>
@@ -338,15 +364,7 @@ header.site-header {
 <h3 id="cat-media">Media &amp; Converters</h3>
 
 <div class="grid tiles reveal">
-<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/file-converter.html" title="File converter">
-<div aria-hidden="true" class="tile__media">🔁</div>
-<div class="tile__body">
-<h4 class="tile__title">File converter</h4>
-<p class="tile__desc">Swap formats with no-nonsense controls.</p>
-</div>
-<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
-<span class="sr-only">Open File converter</span>
-</a></div>
+
 
 <div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/colour-picker.html" title="Image colour picker">
 <div aria-hidden="true" class="tile__media">🎯</div>
@@ -368,15 +386,7 @@ header.site-header {
 <span class="sr-only">Open Image resizer</span>
 </a></div>
 
-<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/vectorise-image.html" title="Image vectoriser">
-<div aria-hidden="true" class="tile__media">🪒</div>
-<div class="tile__body">
-<h4 class="tile__title">Image vectoriser</h4>
-<p class="tile__desc">Transform pixels into precision—vectorise with ease.</p>
-</div>
-<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
-<span class="sr-only">Open Image vectoriser</span>
-</a></div>
+
 
 <div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/qr-code-generator.html" title="QR code generator">
 <div aria-hidden="true" class="tile__media">▩</div>
@@ -388,15 +398,7 @@ header.site-header {
 <span class="sr-only">Open QR code generator</span>
 </a></div>
 
-<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/yt-converter.html" title="YouTube to MP3/MP4 converter">
-<div aria-hidden="true" class="tile__media">▶︎</div>
-<div class="tile__body">
-<h4 class="tile__title">YouTube to MP3/MP4 converter</h4>
-<p class="tile__desc">Save media for offline access.</p>
-</div>
-<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
-<span class="sr-only">Open YouTube to MP3/MP4 converter</span>
-</a></div>
+
 
 <div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/ocr-reader.html" title="OCR reader">
 <div aria-hidden="true" class="tile__media">📷</div>
@@ -451,15 +453,7 @@ header.site-header {
 <span class="sr-only">Open Info generator</span>
 </a></div>
 
-<div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/js-blocker.html" title="JavaScript blocker">
-<div aria-hidden="true" class="tile__media">🧱</div>
-<div class="tile__body">
-<h4 class="tile__title">JavaScript blocker</h4>
-<p class="tile__desc">Test pages with scripts disabled in one click.</p>
-</div>
-<span aria-hidden="true" class="go"><span class="go__arrow">➜</span></span>
-<span class="sr-only">Open JavaScript blocker</span>
-</a></div>
+
 
 <div class="tile-wrap"><a class="tile" data-reveal="" href="toolpages/metadata-reader.html" title="Metadata reade">
 <div aria-hidden="true" class="tile__media">🗂️</div>
@@ -525,13 +519,19 @@ header.site-header {
 
 </div>
 </section>
-<footer class="site-footer" role="contentinfo" style="padding: var(--space-6) 0;">
-<div class="container" style="text-align:center">
-<p class="fine" style="margin:0">
-        © <span id="year">2025</span> riyst.com
+<!-- Footer -->
+  <footer class="site-footer" role="contentinfo" >
+    <div class="container" style="text-align:center; position:relative;">
+      <p class="fine" style="margin:0">
+        &copy; <span id="year">2025</span> riyst.com
       </p>
-</div>
-</footer>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="https://buymeacoffee.com/riyst">Support/Donate</a>
+      </div>
+    </div>
+  </footer>
 <script>
   (function(){
     const qs = (s, el=document) => el.querySelector(s);
